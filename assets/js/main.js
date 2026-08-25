@@ -19,13 +19,16 @@
 
        ENDPOINT: 'https://formspree.io/f/xxxxxxx'
 
-     SEATS: keep this honest or leave it null. `taken: null` hides the meter
-     entirely; set a number only when it is the real count.
+     The APK itself is not in this repository — it is a GitHub Release asset,
+     because it is far past the file size a git repository should carry. The
+     download buttons link straight at it.
   ------------------------------------------------------------------------- */
   var CONFIG = {
     ENDPOINT: '',
-    SEATS: { total: 40, taken: null },
-    STORAGE_KEY: 'ourtales.waitlist'
+    STORAGE_KEY: 'ourtales.waitlist',
+    /* The build the download buttons point at. Kept here so the analytics
+       events carry a version and a release bump has one place to look. */
+    BUILD: { version: '1.0.1', platform: 'android' }
   };
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
@@ -141,27 +144,59 @@
     });
   });
 
-  /* ------------------------------------------------------------ seat meter */
-  (function () {
-    var meter = $('[data-slots-meter]');
-    var fill = $('[data-slots-fill]');
-    var meta = $('[data-slots-meta]');
-    var seats = CONFIG.SEATS;
-    if (!meter || !fill || !meta || seats.taken === null || seats.taken === undefined) { return; }
+  /* --------------------------------------------------------------- download
+     The conversion event that matters on this page. Fired on every download
+     link, tagged with the section it came from and the build it points at, so
+     "which section actually gets the app installed" is answerable. */
+  $$('[data-download]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      track('download_click', {
+        location: link.getAttribute('data-cta') || 'unknown',
+        version: CONFIG.BUILD.version,
+        platform: CONFIG.BUILD.platform
+      });
+    });
+  });
 
-    var pct = Math.max(0, Math.min(100, Math.round((seats.taken / seats.total) * 100)));
-    meter.hidden = false;
-    meta.hidden = false;
-    meta.children[0].textContent = seats.taken + ' of ' + seats.total + ' seats claimed';
-    meta.children[1].textContent = (seats.total - seats.taken) + ' left';
-    // Paint after a frame so the width transition actually runs.
-    requestAnimationFrame(function () { fill.style.width = pct + '%'; });
-  })();
+  /* --------------------------------------------------------- checksum copy
+     A 64-character hex string is not something anyone should retype. */
+  $$('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var value = button.getAttribute('data-copy');
+      var label = button.textContent;
+
+      function done(ok) {
+        button.textContent = ok ? 'Copied' : 'Select it manually';
+        button.classList.toggle('is-copied', ok);
+        window.setTimeout(function () {
+          button.textContent = label;
+          button.classList.remove('is-copied');
+        }, 2200);
+        track('checksum_copy', { ok: ok });
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
+        return;
+      }
+      // execCommand is deprecated but is the only path left on http:// origins.
+      try {
+        var scratch = document.createElement('textarea');
+        scratch.value = value;
+        scratch.setAttribute('readonly', '');
+        scratch.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(scratch);
+        scratch.select();
+        done(document.execCommand('copy'));
+        document.body.removeChild(scratch);
+      } catch (e) { done(false); }
+    });
+  });
 
   /* ---------------------------------------------------------- header state */
   var header = $('#header');
   var dock = $('#dock');
-  var heroCapture = $('[data-capture="hero"]');
+  var heroCta = $('.hero .get');
 
   function onScroll() {
     if (header) { header.classList.toggle('is-stuck', window.scrollY > 8); }
@@ -182,10 +217,10 @@
   setDock(false);
 
   if ('IntersectionObserver' in window) {
-    if (heroCapture) {
+    if (heroCta) {
       new IntersectionObserver(function (entries) {
         setDock(!entries[0].isIntersecting);
-      }, { rootMargin: '-80px 0px 0px 0px' }).observe(heroCapture);
+      }, { rootMargin: '-80px 0px 0px 0px' }).observe(heroCta);
     }
 
     /* --------------------------------------------------------- reveal-on-scroll */
@@ -224,13 +259,15 @@
   if (year) { year.textContent = String(new Date().getFullYear()); }
 
   /* ----------------------------------------------- deep-link into the form
-     Anything pointing at #beta should land with the cursor already in the
-     field on desktop — one less click between intent and conversion. */
-  $$('a[href="#beta"]').forEach(function (link) {
+     "On iPhone? Get notified" should land with the cursor already in the
+     field on desktop — one less click between intent and conversion. On a
+     phone, focusing raises the keyboard over the copy the visitor came to
+     read, so it is deliberately skipped there. */
+  $$('a[href="#ios"]').forEach(function (link) {
     link.addEventListener('click', function () {
       if (window.matchMedia('(max-width: 900px)').matches) { return; }
       window.setTimeout(function () {
-        var field = $('#email-beta');
+        var field = $('#email-ios');
         if (field && !field.closest('.capture').classList.contains('is-done')) {
           field.focus({ preventScroll: true });
         }

@@ -160,6 +160,10 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .btn--ghost { background: transparent; color: var(--text); border-color: var(--hairline); }
 .btn--ghost:hover { border-color: var(--ink); background: rgba(25, 21, 36, 0.03); }
 .btn--sm { min-height: 44px; padding: 0 20px; font-size: 14px; }
+.btn--lg { min-height: 58px; padding: 0 30px; font-size: 16px; }
+/* Ghost button on the dark ground of the final CTA. */
+.btn--onink { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.28); }
+.btn--onink:hover { border-color: #fff; background: rgba(255, 255, 255, 0.07); }
 
 /* ---------------------------------------------------------------- header -- */
 .header {
@@ -180,6 +184,12 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .nav a:hover { color: var(--text); }
 .header__cta { margin-left: 8px; }
 @media (max-width: 900px) { .nav { display: none; } .header__cta { margin-left: auto; } }
+/* On a narrow phone the full label pushes the button past the viewport, so it
+   drops to the verb alone — which is the part that carries the action anyway. */
+@media (max-width: 560px) {
+  .header__cta-long { display: none; }
+  .header__cta { padding: 0 16px; }
+}
 
 /* ------------------------------------------------------------------ hero -- */
 .hero { position: relative; padding: 76px 0 96px; overflow: hidden; }
@@ -254,6 +264,101 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
   .capture__row { flex-direction: column; }
   .capture .btn { width: 100%; }
 }
+
+/* ------------------------------------------------------------ get the app --
+   The download pair. Android is the primary and the iPhone route is visibly
+   secondary — two equal buttons would make the visitor choose a platform
+   before they have chosen the product. */
+.get { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.get--center { justify-content: center; }
+.get__meta { margin-top: 14px; font-size: 13.5px; color: var(--muted); }
+.get__meta a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--hairline); }
+.get__meta a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.get__meta--center { text-align: center; color: rgba(255, 255, 255, 0.6); }
+.get__meta--center a { text-decoration-color: rgba(255, 255, 255, 0.3); }
+.get__meta--center a:hover { color: #fff; }
+@media (max-width: 560px) {
+  .get { flex-direction: column; }
+  .get .btn { width: 100%; }
+}
+
+/* ------------------------------------------------------- install steps --- */
+.install { counter-reset: install; }
+.install li {
+  position: relative; padding: 0 0 30px 62px; counter-increment: install;
+}
+.install li::before {
+  content: counter(install);
+  position: absolute; left: 0; top: 0;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--ink); color: #fff;
+  font-family: var(--serif); font-size: 18px; font-weight: 700;
+  display: grid; place-items: center;
+}
+/* The rail that ties the three steps together, stopping at the last one. */
+.install li::after {
+  content: ''; position: absolute; left: 20.5px; top: 50px; bottom: 8px;
+  width: 1px; background: var(--hairline);
+}
+.install li:last-child { padding-bottom: 0; }
+.install li:last-child::after { display: none; }
+.install h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 8px; padding-top: 8px; }
+.install p { font-size: 15.5px; color: var(--muted); }
+.install b { color: var(--text); font-weight: 600; }
+
+.warnbox {
+  margin-top: 16px; padding: 16px 18px; border-radius: 14px;
+  background: rgba(216, 164, 93, 0.12); border: 1px solid rgba(216, 164, 93, 0.36);
+}
+.warnbox__head {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.02em; color: #7A5714; margin-bottom: 8px;
+}
+.warnbox__head svg { width: 17px; height: 17px; flex: none; }
+.warnbox p { font-size: 14px; line-height: 1.6; color: #6B5426; }
+
+/* ------------------------------------------------------------ build facts */
+.facts { margin: 24px 0 0; }
+.facts > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 10px 0; border-bottom: 1px solid var(--hairline);
+}
+.facts dt { font-size: 13.5px; color: var(--muted); }
+.facts dd { margin: 0; font-size: 14px; font-weight: 600; text-align: right; }
+.facts dd code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; font-weight: 500; }
+.facts__muted { color: var(--muted); font-weight: 400; }
+
+.checksum {
+  margin-top: 22px; padding: 16px; border-radius: 14px;
+  background: var(--cream-deep); border: 1px solid var(--hairline);
+}
+.checksum__head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px;
+}
+.checksum__head span {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted);
+}
+.checksum__copy {
+  border: 1px solid var(--hairline); background: var(--surface); color: var(--text);
+  font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: var(--r-pill);
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.checksum__copy:hover { border-color: var(--ink); }
+.checksum__copy.is-copied { border-color: var(--teal); color: #35786F; }
+.checksum > code {
+  display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px; line-height: 1.7; word-break: break-all; color: var(--text);
+}
+.checksum__note { margin-top: 10px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+/* ----------------------------------------------------------------- iOS --- */
+.ios {
+  margin-top: 40px; padding: 34px;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-card); box-shadow: var(--shadow-sm);
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
+}
+@media (max-width: 860px) { .ios { grid-template-columns: 1fr; gap: 26px; } }
 
 /* --------------------------------------------------------- phone mockup -- */
 .hero__art { position: relative; display: grid; place-items: center; min-height: 620px; }
@@ -484,6 +589,7 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .story-card__head {
   padding: 20px 24px; border-bottom: 1px solid var(--hairline);
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap;
 }
 .story-card__head h3 { font-family: var(--serif); font-size: 1.25rem; }
 .story-card__badge {
@@ -515,8 +621,9 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 
 /* ----------------------------------------------------------------- beta -- */
 .beta__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.deals { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 860px) { .deals { grid-template-columns: 1fr; } }
 .deal { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 32px; box-shadow: var(--shadow-sm); }
-.deal + .deal { margin-top: 20px; }
 .deal h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 16px; }
 .deal li { display: grid; grid-template-columns: 20px 1fr; gap: 13px; padding: 9px 0; font-size: 15px; }
 .deal li svg { width: 17px; height: 17px; margin-top: 4px; flex: none; }
@@ -527,12 +634,7 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
   background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-card);
   padding: 34px; box-shadow: var(--shadow-md); position: sticky; top: 96px;
 }
-.slots__meter { height: 8px; border-radius: var(--r-pill); background: var(--cream-deep); overflow: hidden; margin: 18px 0 10px; }
-.slots__fill { height: 100%; width: 0; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--accent), var(--amber)); transition: width 1.4s var(--ease); }
 .slots__meta { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); }
-.slots__list { margin: 22px 0 24px; }
-.slots__list li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; padding: 7px 0; font-size: 14.5px; color: var(--muted); }
-.slots__list svg { width: 16px; height: 16px; color: var(--teal); margin-top: 3px; }
 @media (max-width: 900px) {
   .beta__grid { grid-template-columns: 1fr; gap: 36px; }
   .slots { position: static; }
@@ -602,7 +704,7 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
   transform: translateY(140%); transition: transform 0.35s var(--ease);
 }
 .dock.is-visible { transform: none; }
-.dock p { color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+.dock p { color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.3; min-width: 0; }
 .dock small { display: block; color: rgba(255,255,255,0.55); font-weight: 400; font-size: 11.5px; }
 .dock .btn { margin-left: auto; }
 @media (max-width: 900px) { .dock { display: flex; } }

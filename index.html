@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OurTales — every photo holds more than one memory</title>
-<meta name="description" content="OurTales turns one photograph into a shared story. The people who were there add their side by voice, photo or text — no account, no app install. Join the private beta.">
+<meta name="description" content="OurTales turns one photograph into a shared story. The people who were there add their side by voice, photo or text — no account, no app install. Download the free Android beta (v1.0.1).">
 <meta name="theme-color" content="#FFF9F2">
 <!-- Absolute URLs, because a crawler and a share-card scraper do not resolve
      relative ones. Point these at the custom domain the day it exists. -->
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OurTales">
 <meta property="og:title" content="OurTales — every photo holds more than one memory">
-<meta property="og:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account. Join the private beta.">
+<meta property="og:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account. Free Android beta, out now.">
 <meta property="og:url" content="https://dev-zohaibalishah.github.io/ourtales-landing/">
 <meta property="og:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/ourtales-logo.png">
 <meta property="og:image:width" content="2080">
@@ -44,10 +44,14 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SoftwareApplication",
+      "@type": "MobileApplication",
       "name": "OurTales",
       "applicationCategory": "LifestyleApplication",
-      "operatingSystem": "iOS, Android",
+      "operatingSystem": "Android 7.0+",
+      "softwareVersion": "1.0.1",
+      "fileSize": "141.7 MB",
+      "installUrl": "https://dev-zohaibalishah.github.io/ourtales-landing/#download",
+      "downloadUrl": "https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk",
       "description": "A mobile app that turns one photograph into a shared, source-aware story: the owner starts with their own account of it, and the people who were there add theirs — by voice, photo or text — without creating an account.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
@@ -73,6 +77,16 @@
           "@type": "Question",
           "name": "What does the beta cost?",
           "acceptedAnswer": { "@type": "Answer", "text": "Nothing. Beta testers keep free access to everything they collect during the beta, permanently." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Android warn me when I install the APK?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because the file did not come from the Play Store. The warning is about where a file came from, not what is in it. You can check that you got the exact file we published by comparing its SHA-256 checksum, which is printed on the download section of this page." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there an iPhone version?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The Android beta is out first. Leave your email and you will hear the day the iOS build is ready — and the people you invite can already take part from an iPhone browser, because contributing needs no app at all." }
         }
       ]
     }
@@ -104,11 +118,16 @@
       <a href="#product">The app</a>
       <a href="#trust">Trust</a>
       <a href="#story">See a story</a>
-      <a href="#beta">Beta</a>
+      <a href="#download">Install</a>
       <a href="#faq">FAQ</a>
     </nav>
 
-    <a class="btn btn--accent btn--sm header__cta" href="#beta" data-cta="header">Get beta access</a>
+    <a class="btn btn--accent btn--sm header__cta"
+       href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk"
+       data-cta="header" data-download>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11"/><path d="m7 12 5 5 5-5"/><path d="M5 20h14"/></svg>
+      Download<span class="header__cta-long">&nbsp;for Android</span>
+    </a>
   </div>
 </header>
 
@@ -120,7 +139,7 @@
     <div class="wrap hero__inner">
 
       <div class="hero__copy">
-        <span class="eyebrow">Private beta · cohort one</span>
+        <span class="eyebrow">Android beta · v1.0.1 · out now</span>
         <h1 class="display">The people in the photo remember what you <em class="mark">don't</em>.</h1>
         <p class="lede">
           OurTales turns one photograph into a shared story. You add your side, then
@@ -129,37 +148,23 @@
           you say so.
         </p>
 
-        <!-- Above-the-fold capture: one field, one decision. -->
-        <div class="capture" data-capture="hero">
-          <form class="capture__form" novalidate>
-            <div class="capture__row">
-              <div class="capture__field">
-                <label class="visually-hidden" for="email-hero">Your email address</label>
-                <input id="email-hero" type="email" name="email" inputmode="email"
-                       autocomplete="email" placeholder="you@email.com"
-                       aria-describedby="err-hero note-hero" required>
-              </div>
-              <button class="btn btn--accent" type="submit" data-cta="hero-form">
-                Get beta access
-              </button>
-            </div>
-            <p class="capture__error" id="err-hero" role="alert"></p>
-            <p class="capture__note" id="note-hero">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-              </svg>
-              Free during beta · iOS &amp; Android · no card, no spam, leave anytime
-            </p>
-          </form>
-
-          <div class="capture__success" role="status" aria-live="polite">
-            <div class="capture__success-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-            </div>
-            <h3>You're on the list.</h3>
-            <p>We'll email you a build invite when cohort one opens. Reply to that email with the photo you want to try first — we read every one.</p>
-          </div>
+        <!-- One decision above the fold: get the app. The email capture is for
+             the iPhone half of the audience and lives further down, so the two
+             never compete for the same click. -->
+        <div class="get">
+          <a class="btn btn--accent btn--lg"
+             href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk"
+             data-cta="hero" data-download>
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11"/><path d="m7 12 5 5 5-5"/><path d="M5 20h14"/></svg>
+            Download the Android app
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#ios" data-cta="hero-ios">On iPhone? Get notified</a>
         </div>
+
+        <p class="get__meta">
+          Free · APK, 141.7&nbsp;MB · Android 7.0+ · v1.0.1 ·
+          <a href="#download">install steps &amp; checksum</a>
+        </p>
 
         <ul class="hero__proof">
           <li class="hero__proof-item">
@@ -567,85 +572,166 @@
               <span>Guessed at the person holding the tray from the pixels, and been wrong in a document your grandchildren will read as fact.</span>
             </li>
           </ul>
-          <a class="btn btn--ink" href="#beta" data-cta="story" style="margin-top:26px">Try it with your own photo →</a>
+          <a class="btn btn--ink" href="#download" data-cta="story" style="margin-top:26px">Try it with your own photo →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================================================================ beta -->
-  <section class="section" id="beta">
+  <!-- ============================================================ download -->
+  <section class="section" id="download">
     <div class="wrap">
       <div class="section-head reveal" style="margin-bottom:56px">
-        <span class="eyebrow">The beta</span>
-        <h2 class="h2">We need forty households, teams and friend groups.</h2>
+        <span class="eyebrow">Install it</span>
+        <h2 class="h2">Three minutes, and one warning screen we should explain.</h2>
         <p class="lede">
-          Cohort one is small on purpose: we want to sit with the results, not drown in
-          them. Here is exactly what you get and exactly what we ask — no surprises after
-          you type your email.
+          OurTales is not on the Play Store yet, so you install it directly. That is
+          normal for a beta, and it means the file comes from us rather than from a
+          store listing — so here is exactly what you are getting and how to check it.
         </p>
       </div>
 
       <div class="beta__grid">
         <div class="reveal">
-          <div class="deal deal--get">
-            <h3>What you get</h3>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Free forever on everything you collect during the beta</b> — whatever we charge for later, your beta memories stay open to you.</span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A build for iOS and Android, plus a browser link for the people you invite.</span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A direct line to the people building it — not a support form.</span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Export of everything you and your circle contribute, whenever you ask.</span></li>
-            </ul>
-          </div>
-
-          <div class="deal deal--give">
-            <h3>What we ask</h3>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>One real photo that actually matters to you. Not a test image.</span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Invite three or more people who were there — the account-free path is the thing we most need to see fail.</span></li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Fifteen minutes of honest feedback at the end of your first week.</span></li>
-            </ul>
-          </div>
+          <ol class="install">
+            <li>
+              <h3>Download the file</h3>
+              <p>Tap the button on this page from the phone you want it on. Your browser will ask you to confirm the download — that is the browser, not the app.</p>
+            </li>
+            <li>
+              <h3>Open it, and allow this one source</h3>
+              <p>
+                Android will say it <em>“can't install unknown apps from this source”</em>.
+                It is asking about the source, not the file. Tap <b>Settings</b>, turn on
+                the permission for your browser, then go back and tap <b>Install</b>.
+              </p>
+              <div class="warnbox">
+                <div class="warnbox__head">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4"/><circle cx="12" cy="16.5" r="1"/><path d="M10.3 3.9 2.4 17.4A2 2 0 0 0 4.1 20.4h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+                  What that screen actually means
+                </div>
+                <p>
+                  Android shows it for every app that did not come from the Play Store,
+                  including ones from companies you have heard of. It is a statement about
+                  where the file came from — which is why we publish the checksum below, so
+                  you can prove the file you got is the file we built.
+                </p>
+              </div>
+            </li>
+            <li>
+              <h3>Open OurTales and start with one real photo</h3>
+              <p>Pick a username, add the photo, say what you remember, then send the invite link to the people who were there. They need nothing installed.</p>
+            </li>
+          </ol>
         </div>
 
         <aside class="slots reveal">
-          <span class="eyebrow">Cohort one</span>
-          <h3 class="h3" style="font-family:var(--serif);font-size:1.6rem">Forty invites, sent in waves</h3>
-          <div class="slots__meter" data-slots-meter hidden>
-            <div class="slots__fill" data-slots-fill></div>
-          </div>
-          <p class="slots__meta" data-slots-meta hidden><span></span><span></span></p>
+          <span class="eyebrow">The build</span>
+          <h3 class="h3" style="font-family:var(--serif);font-size:1.6rem;margin-bottom:18px">OurTales 1.0.1 for Android</h3>
 
-          <ul class="slots__list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Wave one</b> — people bringing a photo an elder can talk about.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Wave two</b> — friend groups and teams with a shared archive.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Wave three</b> — everyone else on the list, in order.</span></li>
-          </ul>
+          <a class="btn btn--accent btn--lg" style="width:100%"
+             href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk"
+             data-cta="download-panel" data-download>
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11"/><path d="m7 12 5 5 5-5"/><path d="M5 20h14"/></svg>
+            Download the APK
+          </a>
 
-          <div class="capture" data-capture="beta" style="margin-top:0;max-width:none">
-            <form class="capture__form" novalidate>
-              <label class="visually-hidden" for="email-beta">Your email address</label>
-              <input id="email-beta" type="email" name="email" inputmode="email"
-                     autocomplete="email" placeholder="you@email.com"
-                     aria-describedby="err-beta note-beta" required style="margin-bottom:10px">
-              <button class="btn btn--accent" type="submit" style="width:100%" data-cta="beta-form">
-                Claim a seat in cohort one
-              </button>
-              <p class="capture__error" id="err-beta" role="alert"></p>
-              <p class="capture__note" id="note-beta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-                One email when your wave opens. Nothing else.
-              </p>
-            </form>
-            <div class="capture__success" role="status" aria-live="polite">
-              <div class="capture__success-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-              </div>
-              <h3>Seat requested.</h3>
-              <p>Watch for an email from the team when your wave opens. Reply to it with the photo you want to start with.</p>
+          <dl class="facts">
+            <div><dt>Version</dt><dd>1.0.1 <span class="facts__muted">(build 1)</span></dd></div>
+            <div><dt>Size</dt><dd>141.7 MB</dd></div>
+            <div><dt>Requires</dt><dd>Android 7.0 or newer</dd></div>
+            <div><dt>Package</dt><dd><code>xyz.ourtales.app</code></dd></div>
+            <div><dt>Signature</dt><dd>APK scheme v2 / v3</dd></div>
+            <div><dt>Price</dt><dd>Free</dd></div>
+          </dl>
+
+          <div class="checksum">
+            <div class="checksum__head">
+              <span>SHA-256</span>
+              <button type="button" class="checksum__copy" data-copy="6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de">Copy</button>
             </div>
+            <code>6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de</code>
+            <p class="checksum__note">Compare this against your downloaded file to prove nothing changed on the way to you.</p>
           </div>
+
+          <p class="slots__meta" style="margin-top:18px">
+            <span>Hosted on GitHub Releases</span>
+            <span><a href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1" data-cta="release-notes">Release notes →</a></span>
+          </p>
         </aside>
+      </div>
+
+      <!-- ------------------------------------------------------------- iOS -->
+      <div class="ios reveal" id="ios">
+        <div>
+          <span class="eyebrow eyebrow--muted">On an iPhone?</span>
+          <h3 class="h3" style="font-family:var(--serif);font-size:1.5rem;margin-bottom:10px">The iOS build isn't ready. You can still take part today.</h3>
+          <p style="color:var(--muted);font-size:15.5px;max-width:52ch">
+            Anyone can contribute to a memory from an iPhone right now — contributing
+            happens in the browser and needs no app. It is <em>starting</em> a memory that
+            needs Android for the moment. Leave your email and you'll hear the day that
+            changes.
+          </p>
+        </div>
+
+        <div class="capture" data-capture="ios" style="margin-top:0">
+          <form class="capture__form" novalidate>
+            <label class="visually-hidden" for="email-ios">Your email address</label>
+            <input id="email-ios" type="email" name="email" inputmode="email"
+                   autocomplete="email" placeholder="you@email.com"
+                   aria-describedby="err-ios note-ios" required style="margin-bottom:10px">
+            <button class="btn btn--ink" type="submit" style="width:100%" data-cta="ios-form">
+              Tell me when iOS is ready
+            </button>
+            <p class="capture__error" id="err-ios" role="alert"></p>
+            <p class="capture__note" id="note-ios">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              One email when it ships. Nothing else.
+            </p>
+          </form>
+          <div class="capture__success" role="status" aria-live="polite">
+            <div class="capture__success-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3>You're on the list.</h3>
+            <p>We'll email you the day the iOS build is ready.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ deal -->
+  <section class="section" id="beta" style="background:var(--cream-deep)">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:48px">
+        <span class="eyebrow">The deal</span>
+        <h2 class="h2">It's free. Here is what we're hoping you'll do with it.</h2>
+        <p class="lede">
+          Nothing is gated and nothing is metered — but this is a beta, and a beta only
+          works if the people in it use it for real. No surprises after you install.
+        </p>
+      </div>
+
+      <div class="deals">
+        <div class="deal deal--get reveal">
+          <h3>What you get</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Free forever on everything you collect during the beta</b> — whatever we charge for later, your beta memories stay open to you.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A browser link for the people you invite, so nobody else has to install anything.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A direct line to the people building it — not a support form.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Export of everything you and your circle contribute, whenever you ask.</span></li>
+          </ul>
+        </div>
+
+        <div class="deal deal--give reveal">
+          <h3>What we're asking</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Start with one real photo that actually matters to you. Not a test image.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Invite three or more people who were there — the account-free path is the thing we most need to see fail.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Tell us what broke. Fifteen honest minutes after your first week is worth more than a hundred installs.</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -677,8 +763,22 @@
           <p>The beta is free, and everything you collect during the beta stays free to you permanently. We haven't set pricing beyond that, and we'd rather tell you honestly than invent a number for a landing page.</p>
         </details>
         <details>
+          <summary>Is it safe to install? Android is warning me.</summary>
+          <p>That warning appears for every app that did not come from the Play Store, including ones from companies you have heard of. It is a statement about <em>where the file came from</em>, not about what is inside it.</p>
+          <p>So we make the source checkable: the build is published on GitHub Releases, it is signed with APK Signature Scheme v2/v3, and the SHA-256 checksum is printed on this page. If the checksum of your download matches, you have the exact file we built — bit for bit.</p>
+        </details>
+        <details>
+          <summary>Why is it 141 MB?</summary>
+          <p>Because this build carries native code for all four Android architectures in one file, so a single link works on any phone rather than making you pick. A per-architecture build is a fraction of the size and is what will go to the Play Store — this one is optimised for “send the link and it just works”.</p>
+        </details>
+        <details>
           <summary>iPhone or Android?</summary>
-          <p>Both — it's one React Native app. Your contributors need neither, because their side happens in a browser.</p>
+          <p>Android for now — the iOS build isn't ready, and there is a one-field waitlist on this page for the day it is.</p>
+          <p>But the people you invite need neither. Contributing happens in a browser, so an iPhone, an old tablet or a desktop all work today.</p>
+        </details>
+        <details>
+          <summary>How do I get updates?</summary>
+          <p>For this build, by downloading the next one from this page and installing over the top — your account and everything in it stays put. Automatic updates arrive with the Play Store listing.</p>
         </details>
         <details>
           <summary>Can I get my memories out?</summary>
@@ -686,7 +786,7 @@
         </details>
         <details>
           <summary>What's still rough?</summary>
-          <p>It's a beta and we'd rather you hear it from us: there is no password reset yet (we don't ask for an email at sign-up, so there's nowhere to send one), invite links can't be revoked once sent, and push notifications need the real build rather than a preview. Cohort one exists to break exactly these.</p>
+          <p>It's a beta and we'd rather you hear it from us: there is no password reset yet (we don't ask for an email at sign-up, so there's nowhere to send one), invite links can't be revoked once sent, and the story won't describe what is in the photo because image analysis is switched off — it says so rather than guessing. The beta exists to break exactly these.</p>
         </details>
       </div>
     </div>
@@ -698,33 +798,22 @@
     <div class="wrap final__inner reveal">
       <span class="eyebrow eyebrow--light" style="justify-content:center;display:inline-flex">Last thing</span>
       <h2 class="h2">There is a photo you've been meaning to ask about.</h2>
-      <p class="lede">Ask this week. Cohort one opens in waves, and the people who remember it are not getting any less busy.</p>
+      <p class="lede">Ask this week. The app is free, it takes three minutes to install, and the people who remember are not getting any less busy.</p>
 
-      <div class="capture" data-capture="final">
-        <form class="capture__form" novalidate>
-          <div class="capture__row">
-            <div class="capture__field">
-              <label class="visually-hidden" for="email-final">Your email address</label>
-              <input id="email-final" type="email" name="email" inputmode="email"
-                     autocomplete="email" placeholder="you@email.com"
-                     aria-describedby="err-final note-final" required>
-            </div>
-            <button class="btn btn--accent" type="submit" data-cta="final-form">Get beta access</button>
-          </div>
-          <p class="capture__error" id="err-final" role="alert"></p>
-          <p class="capture__note" id="note-final">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-            Free during beta · no card · unsubscribe in one click
-          </p>
-        </form>
-        <div class="capture__success" role="status" aria-live="polite">
-          <div class="capture__success-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-          </div>
-          <h3>You're on the list.</h3>
-          <p>We'll be in touch when your wave opens.</p>
-        </div>
+      <div class="get get--center">
+        <a class="btn btn--accent btn--lg"
+           href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk"
+           data-cta="final" data-download>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11"/><path d="m7 12 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Download the Android app
+        </a>
+        <a class="btn btn--lg btn--onink" href="#ios" data-cta="final-ios">On iPhone? Get notified</a>
       </div>
+
+      <p class="get__meta get__meta--center">
+        Free · APK, 141.7&nbsp;MB · Android 7.0+ · v1.0.1 ·
+        <a href="#download">install steps &amp; checksum</a>
+      </p>
     </div>
   </section>
 </main>
@@ -757,9 +846,12 @@
         </ul>
       </div>
       <div>
-        <h4>Beta</h4>
+        <h4>Get it</h4>
         <ul>
-          <li><a href="#beta">Join cohort one</a></li>
+          <li><a href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk" data-cta="footer" data-download>Download for Android</a></li>
+          <li><a href="#download">Install steps</a></li>
+          <li><a href="#ios">iPhone waitlist</a></li>
+          <li><a href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1">Release notes</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
@@ -773,8 +865,8 @@
 
 <!-- Mobile conversion dock: appears once the hero CTA has scrolled away. -->
 <div class="dock" id="dock" aria-hidden="true">
-  <p>Cohort one is open<small>Free during beta · no account for guests</small></p>
-  <a class="btn btn--accent btn--sm" href="#beta" data-cta="dock">Join</a>
+  <p>OurTales 1.0.1<small>Free · Android 7.0+ · 141.7 MB</small></p>
+  <a class="btn btn--accent btn--sm" href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk" data-cta="dock" data-download>Download</a>
 </div>
 
 <script src="assets/js/main.js" defer></script>

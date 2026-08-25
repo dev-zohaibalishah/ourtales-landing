@@ -1,6 +1,7 @@
 # OurTales — landing page
 
-**Live:** https://dev-zohaibalishah.github.io/ourtales-landing/
+**Live:** https://dev-zohaibalishah.github.io/ourtales-landing/  
+**Download:** [OurTales 1.0.1 for Android](https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk) · 141.7 MB · Android 7.0+
 
 The acquisition page for **OurTales**, the memory-preservation app: one photograph,
 everyone who was there adds their side by voice, photo or text, and a composed story
@@ -46,6 +47,62 @@ the link gets shared anywhere that matters.
 
 ---
 
+## The app itself
+
+The APK is **not in this repository** — at 141.7 MB it is well past what a git
+repository should carry. It lives as a [GitHub Release][rel] asset, and every download
+button on the page links straight at it:
+
+```
+https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk
+```
+
+Current build, all of it verified against the file itself rather than copied from a
+build log:
+
+| | |
+|---|---|
+| Version | 1.0.1 (versionCode 1) |
+| Size | 141.7 MB (148,579,637 bytes) |
+| Package | `xyz.ourtales.app` |
+| minSdk / targetSdk | 24 (Android 7.0) / 36 |
+| ABIs | arm64-v8a, armeabi-v7a, x86, x86_64 — which is most of the size |
+| Signing | APK Signature Scheme v2/v3 |
+| SHA-256 | `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` |
+
+[rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1
+
+### Publishing a new build
+
+```bash
+gh release create v1.0.2 ./ourtales-1.0.2-android.apk --title "OurTales 1.0.2 — Android beta" --notes-file notes.md
+```
+
+Then update the page. The version, size and checksum are written into the HTML as
+literal text in several places on purpose — a download link that only works once
+JavaScript has run is a download link that silently fails for some people:
+
+- **the URL** — six links: header, hero, download panel, final CTA, mobile dock, footer
+- **the numbers** — hero `.get__meta`, final `.get__meta`, the `.facts` list, the mobile dock
+- **the checksum** — the `data-copy` attribute *and* the visible `<code>` beside it
+- **JSON-LD** — `softwareVersion`, `fileSize`, `downloadUrl`
+- **`CONFIG.BUILD`** in `assets/js/main.js`, which only tags the analytics events
+
+Sanity check before pushing:
+
+```bash
+grep -c "1\.0\.1" index.html
+```
+
+### Before you publish an APK anywhere
+
+Confirm nothing secret is baked into the JS bundle. This build was checked: it carries
+only the Supabase **publishable** key (client-safe by design) — no service-role JWT, no
+`sb_secret_` value, no service-account private key. Anything shipped in an APK is public
+the moment the link is.
+
+---
+
 ## Wire up the waitlist
 
 Signups are **not** collected until you set one string. Open
@@ -54,31 +111,27 @@ Signups are **not** collected until you set one string. Open
 ```js
 var CONFIG = {
   ENDPOINT: 'https://formspree.io/f/xxxxxxx',   // or a Supabase Edge Function, Buttondown, …
-  SEATS: { total: 40, taken: null },
-  STORAGE_KEY: 'ourtales.waitlist'
+  STORAGE_KEY: 'ourtales.waitlist',
+  BUILD: { version: '1.0.1', platform: 'android' }
 };
 ```
 
-It POSTs `{ email, source, page }` as JSON. `source` is which of the three forms fired
-(`hero`, `beta`, `final`), so you can see which section actually converts.
+It POSTs `{ email, source, page }` as JSON. `source` names the form that fired — today
+that is the single `ios` waitlist form, since the Android half of the audience downloads
+the app instead of leaving an address.
 
 **Until it is set**, a submission is validated, written to `localStorage` and shown the
 success state — so the page can be demoed and shared without pretending to collect
 addresses it is throwing away. Addresses captured that way are readable in the console
 with `JSON.parse(localStorage.getItem('ourtales.waitlist'))`.
 
-### The seat meter
-
-`CONFIG.SEATS.taken` is `null` by default and the progress meter stays hidden. Put a
-number there **only when it is the real count** — a scarcity bar that lies is the one
-thing that makes a beta page feel like a scam.
-
 ### Analytics
 
 `track()` in `main.js` pushes to `dataLayer`, `gtag` and `plausible` if any of them are
 on the page, and no-ops otherwise. Drop your tag into `index.html` and events start
-flowing with no edit here. Events: `cta_click`, `signup_submit`, `signup_success`,
-`signup_invalid`, `signup_error` — each carrying the section it came from.
+flowing with no edit here. Events: `download_click` (the one that matters — carries version and
+section), `cta_click`, `checksum_copy`, `signup_submit`, `signup_success`,
+`signup_invalid`, `signup_error`.
 
 ---
 
@@ -86,12 +139,14 @@ flowing with no edit here. Events: `cta_click`, `signup_submit`, `signup_success
 
 | Decision | Reason |
 |---|---|
-| Email field above the fold, one input | Every extra field costs signups. Name, device and use-case are asked in the confirmation email instead, where the person is already committed. |
-| The same offer three times (hero, beta, footer) | Readers convert at different depths. Nobody should have to scroll back up. |
-| Mobile dock appears only after the hero form leaves the screen | A persistent bar competing with the hero CTA cannibalises it. |
-| "What you get / what we ask" side by side | Naming the cost up front converts better than hiding it, and it filters out testers who will never invite anyone. |
+| One primary CTA above the fold, and it is the download | The app exists and is free. Anything standing between the visitor and installing it is a leak — including an email field asking permission to send them the thing they could already have. |
+| The iPhone route is a visibly secondary button | Two equal buttons make the visitor choose a platform before they have chosen the product. The email capture still exists — one field, further down — for the half of the audience Android cannot serve yet. |
+| Six download links, one destination | Readers convert at different depths: header, hero, story section, download panel, final CTA, mobile dock. Nobody should have to scroll back up. |
+| A whole section about Android's "unknown source" warning | For an APK outside the Play Store this is *the* drop-off point. Explaining what the warning actually says — and publishing the checksum so the source becomes checkable — converts far better than hoping nobody notices. |
+| Version, size, minimum Android and checksum stated up front | Nothing kills a direct download like uncertainty about what you just got. Every number on the page was read out of the APK itself, not copied from a build log. |
+| "What you get / what we're asking" side by side | Naming the cost up front converts better than hiding it, and it filters out testers who will never invite anyone. |
 | Objection-handling FAQ, including a "what's still rough" answer | The rough-edges answer is the highest-trust thing on the page. It is also indexed as `FAQPage` structured data. |
-| No testimonials, no user counts, no invented statistics | Nothing has shipped yet. The proof on this page is product proof — enforceable guarantees — because fabricated social proof is the fastest way to lose the audience this app is for. |
+| No testimonials, no user counts, no invented statistics | Nothing has shipped to real users yet. The proof here is product proof — enforceable guarantees and a build you can verify — because fabricated social proof is the fastest way to lose the audience this app is for. |
 
 ## Accessibility
 
