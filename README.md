@@ -63,14 +63,22 @@ build log:
 | | |
 |---|---|
 | Version | 1.0.1 (versionCode 1) |
-| Size | 141.7 MB (148,579,637 bytes) |
+| Size | 141.7 MB (148,598,233 bytes) |
 | Package | `xyz.ourtales.app` |
 | minSdk / targetSdk | 24 (Android 7.0) / 36 |
 | ABIs | arm64-v8a, armeabi-v7a, x86, x86_64 — which is most of the size |
 | Signing | APK Signature Scheme v2/v3 |
-| SHA-256 | `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` |
+| SHA-256 | `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` |
 
 [rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1
+
+The asset was replaced in place on 25 Aug 2026 with a newer build of the same
+version, so the download URL never changed. The superseded file checksummed
+`6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de`; both builds carry
+the same signing certificate (`ef4e3c1b…baa6577c`), so the new one installs over the old
+with nothing to uninstall. Replacing an asset means anyone holding the old file now
+fails a checksum comparison against this page — the release notes say so explicitly, and
+a version bump is the cleaner move once real testers are out there.
 
 ### Publishing a new build
 
