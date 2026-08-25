@@ -5,20 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not found — OurTales</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css">
+<meta name="theme-color" content="#FFF9F2">
+<!--
+  Deliberately self-contained: GitHub Pages serves this file for a miss at any
+  depth, so a relative asset path would resolve against a URL that does not
+  exist and an absolute one breaks on a project-subpath host. An unstyled 404
+  is the one page that must never depend on anything.
+-->
+<style>
+  :root { --cream:#FFF9F2; --ink:#16161A; --muted:#6E6E78; --accent:#F5334B; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; display:grid; place-items:center; padding:32px;
+    background:var(--cream); color:var(--ink); text-align:center;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  .box { max-width:520px; }
+  svg { width:64px; height:64px; margin:0 auto 26px; display:block; }
+  .kicker {
+    font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 16px;
+  }
+  h1 {
+    font-family:Georgia,"Times New Roman",serif; font-weight:700;
+    font-size:clamp(1.8rem,5vw,2.6rem); line-height:1.12; letter-spacing:-.03em; margin:0;
+  }
+  p { color:var(--muted); margin:18px 0 0; }
+  a {
+    display:inline-block; margin-top:28px; padding:15px 26px; border-radius:14px;
+    background:var(--accent); color:#fff; font-weight:600; text-decoration:none;
+    box-shadow:0 10px 30px rgba(245,51,75,.28);
+  }
+  a:hover { background:#D91E37; }
+</style>
 </head>
 <body>
-  <main class="section" style="min-height:70vh;display:grid;place-items:center;text-align:center">
-    <div class="wrap" style="max-width:560px">
-      <span class="eyebrow" style="justify-content:center;display:inline-flex">404</span>
-      <h1 class="display" style="font-size:clamp(2rem,5vw,3rem)">This page has no one to remember it.</h1>
-      <p class="lede" style="margin-top:18px">The link is broken or the page has moved. The rest of OurTales is still where you left it.</p>
-      <a class="btn btn--accent" href="/" style="margin-top:28px">Back to the beginning</a>
-    </div>
+  <main class="box">
+    <svg viewBox="0 0 254 260" role="img" aria-label="OurTales">
+      <rect x="12" y="68" width="88" height="88" rx="29" fill="#5D54D6" transform="rotate(-18 56 112)"/>
+      <rect x="114" y="18" width="88" height="88" rx="29" fill="#D9799D" transform="rotate(18 158 62)"/>
+      <rect x="154" y="120" width="88" height="88" rx="29" fill="#D8A45D" transform="rotate(-18 198 164)"/>
+      <rect x="50" y="170" width="88" height="88" rx="29" fill="#4C9C92" transform="rotate(18 94 214)"/>
+      <circle cx="127" cy="132" r="42" fill="#FFF9F2"/>
+      <path d="M127 91L135.5 118.5L163 127L135.5 135.5L127 163L118.5 135.5L91 127L118.5 118.5L127 91Z" fill="#2A2141"/>
+      <circle cx="127" cy="127" r="10" fill="#FFF9F2"/>
+    </svg>
+    <p class="kicker">404</p>
+    <h1>This page has no one to remember it.</h1>
+    <p>The link is broken or the page has moved. The rest of OurTales is still where you left it.</p>
+    <a href="/ourtales-landing/">Back to the beginning</a>
   </main>
 </body>
 </html>

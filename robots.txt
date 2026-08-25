@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ourtales.app/sitemap.xml
+Sitemap: https://dev-zohaibalishah.github.io/ourtales-landing/sitemap.xml

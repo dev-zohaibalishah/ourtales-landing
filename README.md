@@ -1,5 +1,7 @@
 # OurTales — landing page
 
+**Live:** https://dev-zohaibalishah.github.io/ourtales-landing/
+
 The acquisition page for **OurTales**, the memory-preservation app: one photograph,
 everyone who was there adds their side by voice, photo or text, and a composed story
 holds all of it without rewriting anyone or inventing anything.
@@ -23,6 +25,24 @@ python -m http.server 8000
 Pushing to `main` publishes to GitHub Pages via `.github/workflows/pages.yml`.
 It works unchanged on Netlify, Vercel, Cloudflare Pages or any static host — the
 repository root is the site.
+
+### When the real domain exists
+
+Three files hold the absolute URL and all three must move together, or the canonical
+tag will point at a host that no longer serves the page:
+
+- `index.html` — `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image`
+- `sitemap.xml` — `<loc>`
+- `robots.txt` — `Sitemap:`
+
+Also change the `404.html` home link away from `/ourtales-landing/` and drop the
+project subpath.
+
+### Known gap: the share card
+
+`og:image` currently points at the 2080×520 brand logo. Scrapers crop or letterbox it
+to 1.91:1. A purpose-built 1200×630 `assets/img/og-card.png` should replace it before
+the link gets shared anywhere that matters.
 
 ---
 
