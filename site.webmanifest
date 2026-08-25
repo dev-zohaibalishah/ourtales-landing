@@ -1,0 +1,12 @@
+{
+  "name": "OurTales",
+  "short_name": "OurTales",
+  "description": "Every photo holds more than one memory.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9F2",
+  "theme_color": "#FFF9F2",
+  "icons": [
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
