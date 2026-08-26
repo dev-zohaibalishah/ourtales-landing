@@ -16,18 +16,18 @@
 <meta property="og:title" content="OurTales — every photo holds more than one memory">
 <meta property="og:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account. Free Android beta, out now.">
 <meta property="og:url" content="https://dev-zohaibalishah.github.io/ourtales-landing/">
-<meta property="og:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/ourtales-logo.png">
-<meta property="og:image:width" content="2080">
-<meta property="og:image:height" content="520">
-<meta property="og:image:alt" content="The OurTales mosaic mark beside the wordmark: shared memories, many voices.">
+<meta property="og:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The OurTales logo: an open photo album showing a family watching a sunset, above the OurTales wordmark.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="OurTales — every photo holds more than one memory">
 <meta name="twitter:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account.">
-<meta name="twitter:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/ourtales-logo.png">
+<meta name="twitter:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/og-card.png">
 
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/img/ourtales-icon-512.png" sizes="512x512" type="image/png">
-<link rel="apple-touch-icon" href="assets/img/ourtales-icon-512.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,17 +100,11 @@
 
 <header class="header" id="header">
   <div class="wrap header__inner">
+    <!-- alt="" on both halves: the link already carries the accessible name,
+         and two images inside it would otherwise announce twice. -->
     <a class="brand" href="#top" aria-label="OurTales home">
-      <svg class="brand__mark" viewBox="0 0 254 260" aria-hidden="true" focusable="false">
-        <rect x="12" y="68" width="88" height="88" rx="29" fill="#5D54D6" transform="rotate(-18 56 112)"/>
-        <rect x="114" y="18" width="88" height="88" rx="29" fill="#D9799D" transform="rotate(18 158 62)"/>
-        <rect x="154" y="120" width="88" height="88" rx="29" fill="#D8A45D" transform="rotate(-18 198 164)"/>
-        <rect x="50" y="170" width="88" height="88" rx="29" fill="#4C9C92" transform="rotate(18 94 214)"/>
-        <circle cx="127" cy="132" r="42" fill="#FFF9F2"/>
-        <path d="M127 91L135.5 118.5L163 127L135.5 135.5L127 163L118.5 135.5L91 127L118.5 118.5L127 91Z" fill="#2A2141"/>
-        <circle cx="127" cy="127" r="10" fill="#FFF9F2"/>
-      </svg>
-      <span class="brand__word">OurTales</span>
+      <img class="brand__mark" src="assets/img/ourtales-mark.png" width="366" height="261" alt="">
+      <img class="brand__word" src="assets/img/ourtales-wordmark.png" width="456" height="110" alt="">
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -126,7 +120,7 @@
        href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk"
        data-cta="header" data-download>
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11"/><path d="m7 12 5 5 5-5"/><path d="M5 20h14"/></svg>
-      Download<span class="header__cta-long">&nbsp;for Android</span>
+      <span>Download<span class="header__cta-long"> for Android</span></span>
     </a>
   </div>
 </header>
@@ -822,17 +816,11 @@
   <div class="wrap">
     <div class="footer__grid">
       <div>
-        <a class="brand" href="#top">
-          <svg class="brand__mark" viewBox="0 0 254 260" aria-hidden="true">
-            <rect x="12" y="68" width="88" height="88" rx="29" fill="#5D54D6" transform="rotate(-18 56 112)"/>
-            <rect x="114" y="18" width="88" height="88" rx="29" fill="#D9799D" transform="rotate(18 158 62)"/>
-            <rect x="154" y="120" width="88" height="88" rx="29" fill="#D8A45D" transform="rotate(-18 198 164)"/>
-            <rect x="50" y="170" width="88" height="88" rx="29" fill="#4C9C92" transform="rotate(18 94 214)"/>
-            <circle cx="127" cy="132" r="42" fill="#FFF9F2"/>
-            <path d="M127 91L135.5 118.5L163 127L135.5 135.5L127 163L118.5 135.5L91 127L118.5 118.5L127 91Z" fill="#2A2141"/>
-            <circle cx="127" cy="127" r="10" fill="#FFF9F2"/>
-          </svg>
-          <span class="brand__word">OurTales</span>
+        <!-- The footer ground is near-black, so the wordmark's navy "Our"
+             would vanish here — this variant repaints it cream. -->
+        <a class="brand" href="#top" aria-label="OurTales home">
+          <img class="brand__mark" src="assets/img/ourtales-mark.png" width="366" height="261" alt="">
+          <img class="brand__word" src="assets/img/ourtales-wordmark-onink.png" width="456" height="110" alt="">
         </a>
         <p>Shared memories, many voices. One photograph, everyone who was there, and a story that never claims more than the people in it did.</p>
       </div>

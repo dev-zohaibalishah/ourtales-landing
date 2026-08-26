@@ -39,12 +39,6 @@ tag will point at a host that no longer serves the page:
 Also change the `404.html` home link away from `/ourtales-landing/` and drop the
 project subpath.
 
-### Known gap: the share card
-
-`og:image` currently points at the 2080×520 brand logo. Scrapers crop or letterbox it
-to 1.91:1. A purpose-built 1200×630 `assets/img/og-card.png` should replace it before
-the link gets shared anywhere that matters.
-
 ---
 
 ## The app itself
@@ -169,8 +163,9 @@ goes `inert` while off-screen so it cannot take focus behind the page.
 Palette, type scale, radii and motion come from the app's own tokens
 (`src/theme/tokens.ts`, `src/theme/typography.ts`) rather than being invented for
 marketing: a single crimson accent `#F5334B` on a warm cream ground, Playfair Display
-for headlines and the wordmark, Inter for everything else. The four mosaic colours from
-the app icon are used only for the "many voices" motif — never for an affordance.
+for headlines, Inter for everything else. The wordmark is the supplied logo artwork, not
+type. The four secondary colours are used only for the "many voices" motif — avatars,
+step markers, pillar icons — and never for an affordance.
 
 The phone in the hero is drawn in CSS, not photographed, and uses gradient
 "PhotoPlates" exactly as the app does in place of real images.
@@ -179,11 +174,31 @@ The phone in the hero is drawn in CSS, not photographed, and uses gradient
 
 ```
 index.html            the page
-404.html              not-found page
+404.html              not-found page — self-contained, logo inlined as a data URI
 assets/css/styles.css design system + every section
 assets/js/main.js     forms, analytics hooks, reveal, dock
-assets/img/           logo + favicon
+assets/img/           brand assets (below)
 site.webmanifest      installable metadata
 robots.txt sitemap.xml
 .github/workflows/pages.yml
 ```
+
+### Brand assets
+
+The logo arrives as one stacked lockup — book above wordmark — which is illegible at
+header size, so it is cut into halves the page recombines horizontally:
+
+| File | Used by |
+|---|---|
+| `ourtales-lockup.png` | the master artwork; not referenced by the page, kept for decks and press |
+| `ourtales-mark.png` | the book alone — header and footer |
+| `ourtales-wordmark.png` | the wordmark alone — header |
+| `ourtales-wordmark-onink.png` | same wordmark with the navy "Our" repainted cream, for the near-black footer |
+| `og-card.png` | 1200×630 share card, the lockup centred on cream |
+| `favicon-32.png`, `favicon-180.png`, `ourtales-icon-512.png` | tab icon, apple-touch icon, manifest |
+
+All of them are generated from the single supplied PNG. Heights are set in CSS and
+widths left to the intrinsic ratio, so no half can be squashed independently of the
+other. When the logo changes, re-cut all of them rather than replacing one — a mark and
+wordmark from different revisions sitting side by side is the kind of thing nobody
+notices for months.

@@ -4,9 +4,10 @@
    The palette, type scale and radii are lifted from the app's own design
    tokens (src/theme/tokens.ts, src/theme/typography.ts) rather than invented
    here, so the page and the product read as one thing: a single crimson
-   accent, a warm cream ground, Playfair for the wordmark and headlines,
-   Inter for everything else. The four mosaic colours come from the app icon
-   and carry the "many voices" motif only — never an affordance.
+   accent, a warm cream ground, Playfair for headlines,
+   Inter for everything else. The wordmark itself is now artwork rather than
+   type — see .brand. The four accent colours carry the "many voices" motif
+   only, never an affordance.
    ========================================================================== */
 
 /* --------------------------------------------------------------- tokens -- */
@@ -29,7 +30,7 @@
   --accent-soft:  #FBD3DA;
   --accent-wash:  #FFF1F3;
 
-  /* mosaic — the "many voices" motif only */
+  /* the "many voices" motif — avatars, step markers, pillar icons; never an affordance */
   --violet:       #5D54D6;
   --pink:         #D9799D;
   --amber:        #D8A45D;
@@ -176,9 +177,17 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 }
 .header.is-stuck { border-bottom-color: var(--hairline); background: rgba(255, 249, 242, 0.95); }
 .header__inner { display: flex; align-items: center; gap: 24px; height: 72px; }
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: -0.02em; }
-.brand__mark { width: 34px; height: 34px; flex: none; }
-.brand__word { font-family: var(--serif); font-size: 1.28rem; }
+/* The supplied logo is a stacked lockup — book above wordmark — which is
+   illegible at header size, so the two halves are separate files and get
+   recomposed horizontally here. Heights are set and widths left to the
+   intrinsic ratio, so neither half can be squashed. */
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand__mark { height: 42px; width: auto; flex: none; }
+.brand__word { height: 22px; width: auto; flex: none; }
+@media (max-width: 420px) {
+  .brand__mark { height: 32px; }
+  .brand__word { height: 17px; }
+}
 .nav { display: flex; align-items: center; gap: 30px; margin-left: auto; }
 .nav a { font-size: 14.5px; font-weight: 500; color: var(--muted); transition: color 0.18s var(--ease); }
 .nav a:hover { color: var(--text); }
@@ -683,7 +692,9 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 /* --------------------------------------------------------------- footer -- */
 .footer { background: var(--ink-deep); color: rgba(255, 255, 255, 0.6); padding: 60px 0 40px; font-size: 14px; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }
-.footer .brand { color: #fff; margin-bottom: 14px; }
+.footer .brand { margin-bottom: 16px; }
+.footer .brand__mark { height: 44px; }
+.footer .brand__word { height: 23px; }
 .footer p { max-width: 340px; line-height: 1.7; }
 .footer h4 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
 .footer li { padding: 6px 0; }
