@@ -1,7 +1,7 @@
 # OurTales — landing page
 
 **Live:** https://dev-zohaibalishah.github.io/ourtales-landing/  
-**Download:** [OurTales 1.0.1 for Android](https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk) · 141.7 MB · Android 7.0+
+**Download:** [OurTales 1.0.1 for Android](https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk) · 145.0 MB · Android 7.0+
 
 The acquisition page for **OurTales**, the memory-preservation app: one photograph,
 everyone who was there adds their side by voice, photo or text, and a composed story
@@ -43,7 +43,7 @@ project subpath.
 
 ## The app itself
 
-The APK is **not in this repository** — at 141.7 MB it is well past what a git
+The APK is **not in this repository** — at 145.0 MB it is well past what a git
 repository should carry. It lives as a [GitHub Release][rel] asset, and every download
 button on the page links straight at it:
 
@@ -57,22 +57,36 @@ build log:
 | | |
 |---|---|
 | Version | 1.0.1 (versionCode 1) |
-| Size | 141.7 MB (148,598,233 bytes) |
+| Size | 145.0 MB (152,031,865 bytes) |
 | Package | `xyz.ourtales.app` |
 | minSdk / targetSdk | 24 (Android 7.0) / 36 |
 | ABIs | arm64-v8a, armeabi-v7a, x86, x86_64 — which is most of the size |
 | Signing | APK Signature Scheme v2/v3 |
-| SHA-256 | `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` |
+| SHA-256 | `4e4b77aa733768207405693c9acd8aaec4ada56ecb68657351ade92a4043fc5f` |
 
 [rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1
 
-The asset was replaced in place on 25 Aug 2026 with a newer build of the same
-version, so the download URL never changed. The superseded file checksummed
-`6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de`; both builds carry
-the same signing certificate (`ef4e3c1b…baa6577c`), so the new one installs over the old
-with nothing to uninstall. Replacing an asset means anyone holding the old file now
-fails a checksum comparison against this page — the release notes say so explicitly, and
-a version bump is the cleaner move once real testers are out there.
+The `v1.0.1` asset has been replaced in place twice, so the download URL has never
+changed and three distinct binaries have now been published under it. Superseded
+checksums, oldest first:
+
+- `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` — 148,579,637 bytes
+- `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` — 148,598,233 bytes
+
+Every one of them carries the same signing certificate (`ef4e3c1b…baa6577c`), so each
+installs straight over the last with nothing to uninstall. That is the *only* reason
+replacing in place has been safe.
+
+**It should stop being the habit, though.** `versionName` and `versionCode` have stayed
+`1.0.1` / `1` across all three, which means:
+
+- anyone holding an earlier download now fails a checksum comparison against this page,
+  and a failed checksum is indistinguishable from tampering unless they read the release
+  notes (which record the superseded values for exactly this reason);
+- no tester can tell you which build they are running, and the app cannot tell you either;
+- Play Store submission will reject a second upload at `versionCode 1` outright.
+
+Bump `versionCode` in `app.config.ts` and cut a new tag for the next build.
 
 ### Publishing a new build
 
