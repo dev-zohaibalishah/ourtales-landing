@@ -28,7 +28,7 @@
     STORAGE_KEY: 'ourtales.waitlist',
     /* The build the download buttons point at. Kept here so the analytics
        events carry a version and a release bump has one place to look. */
-    BUILD: { version: '1.0.1', platform: 'android' }
+    BUILD: { version: '1.0.2', platform: 'android' }
   };
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };

@@ -1,7 +1,7 @@
 # OurTales — landing page
 
 **Live:** https://dev-zohaibalishah.github.io/ourtales-landing/  
-**Download:** [OurTales 1.0.1 for Android](https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk) · 145.0 MB · Android 7.0+
+**Download:** [OurTales 1.0.2 for Android](https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.2/ourtales-1.0.2-android.apk) · 145.0 MB · Android 7.0+
 
 The acquisition page for **OurTales**, the memory-preservation app: one photograph,
 everyone who was there adds their side by voice, photo or text, and a composed story
@@ -48,7 +48,7 @@ repository should carry. It lives as a [GitHub Release][rel] asset, and every do
 button on the page links straight at it:
 
 ```
-https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.1/ourtales-1.0.1-android.apk
+https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.2/ourtales-1.0.2-android.apk
 ```
 
 Current build, all of it verified against the file itself rather than copied from a
@@ -56,51 +56,56 @@ build log:
 
 | | |
 |---|---|
-| Version | 1.0.1 (versionCode 1) |
-| Size | 145.0 MB (152,046,193 bytes) |
+| Version | 1.0.2 (versionCode 2) |
+| Size | 145.0 MB (152,047,557 bytes) |
 | Package | `xyz.ourtales.app` |
 | minSdk / targetSdk | 24 (Android 7.0) / 36 |
 | ABIs | arm64-v8a, armeabi-v7a, x86, x86_64 — which is most of the size |
 | Signing | APK Signature Scheme v2/v3 |
-| SHA-256 | `165240b9f37fa811419bac5e23a2ebb83eb2a6680965573535b5446b0bc64745` |
+| SHA-256 | `8d7e89ab02a73b2d5bd2894023865cd9f8e5a5347756d905ff478776b14ef39b` |
 
-[rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1
+[rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.2
 
-The `v1.0.1` asset has been replaced in place three times, so the download URL has never
-changed and four distinct binaries have now been published under it. Superseded
-checksums, oldest first:
+### Version history
 
-- `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` — 148,579,637 bytes
-- `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` — 148,598,233 bytes
-- `4e4b77aa733768207405693c9acd8aaec4ada56ecb68657351ade92a4043fc5f` — 152,031,865 bytes
+`1.0.2` is the first build with its own `versionCode`, and therefore the first with its
+own tag and its own download URL. Before it, the `v1.0.1` asset was replaced in place
+three times, so four distinct binaries shipped under one unchanging URL:
+
+| Published | Version | SHA-256 | Bytes |
+|---|---|---|---|
+| 25 Aug 2026 | 1.0.1 (code 1) | `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` | 148,579,637 |
+| 25 Aug 2026 | 1.0.1 (code 1) | `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` | 148,598,233 |
+| 27 Aug 2026 | 1.0.1 (code 1) | `4e4b77aa733768207405693c9acd8aaec4ada56ecb68657351ade92a4043fc5f` | 152,031,865 |
+| 28 Aug 2026 | 1.0.1 (code 1) | `165240b9f37fa811419bac5e23a2ebb83eb2a6680965573535b5446b0bc64745` | 152,046,193 |
+| 29 Aug 2026 | **1.0.2 (code 2)** | `8d7e89ab02a73b2d5bd2894023865cd9f8e5a5347756d905ff478776b14ef39b` | 152,047,557 |
 
 Every one of them carries the same signing certificate (`ef4e3c1b…baa6577c`), so each
-installs straight over the last with nothing to uninstall. That is the *only* reason
-replacing in place has been safe.
+installs straight over the last with nothing to uninstall. That is the only reason
+replacing in place did no damage — but it did mean four builds were indistinguishable
+from inside the app, and anyone holding an older file failed a checksum comparison
+against the page for reasons that looked exactly like tampering.
 
-**It should stop being the habit, though.** `versionName` and `versionCode` have stayed
-`1.0.1` / `1` across all four, which means:
-
-- anyone holding an earlier download now fails a checksum comparison against this page,
-  and a failed checksum is indistinguishable from tampering unless they read the release
-  notes (which record the superseded values for exactly this reason);
-- no tester can tell you which build they are running, and the app cannot tell you either;
-- Play Store submission will reject a second upload at `versionCode 1` outright.
-
-Bump `versionCode` in `app.config.ts` and cut a new tag for the next build.
+Keep the new habit: bump `versionCode` in `app.config.ts`, cut a new tag, leave the old
+release standing.
 
 ### Publishing a new build
 
 ```bash
-gh release create v1.0.2 ./ourtales-1.0.2-android.apk --title "OurTales 1.0.2 — Android beta" --notes-file notes.md
+gh release create v1.0.3 ./ourtales-1.0.3-android.apk --title "OurTales 1.0.3 — Android beta" --notes-file notes.md --latest
 ```
 
 Then update the page. The version, size and checksum are written into the HTML as
 literal text in several places on purpose — a download link that only works once
 JavaScript has run is a download link that silently fails for some people:
 
-- **the URL** — six links: header, hero, download panel, final CTA, mobile dock, footer
-- **the numbers** — hero `.get__meta`, final `.get__meta`, the `.facts` list, the mobile dock
+- **the URL** — six links: header, hero, download panel, final CTA, mobile dock, footer.
+  A version bump changes the tag *and* the filename, so all six move together, plus the
+  two `releases/tag/` links (download panel, footer)
+- **the version string** — hero eyebrow, hero `.get__meta`, final `.get__meta`, the
+  download panel heading, the `.facts` Version row, the mobile dock, `<meta name="description">`
+- **the size** — hero `.get__meta`, final `.get__meta`, the `.facts` Size row, the mobile
+  dock, JSON-LD `fileSize` (only when the rounded MB actually moves)
 - **the checksum** — the `data-copy` attribute *and* the visible `<code>` beside it
 - **JSON-LD** — `softwareVersion`, `fileSize`, `downloadUrl`
 - **`CONFIG.BUILD`** in `assets/js/main.js`, which only tags the analytics events
@@ -108,7 +113,7 @@ JavaScript has run is a download link that silently fails for some people:
 Sanity check before pushing:
 
 ```bash
-grep -c "1\.0\.1" index.html
+grep -c "1\.0\.2" index.html   # and grep -c "1\.0\.1" should be 0
 ```
 
 ### Before you publish an APK anywhere
@@ -129,7 +134,7 @@ Signups are **not** collected until you set one string. Open
 var CONFIG = {
   ENDPOINT: 'https://formspree.io/f/xxxxxxx',   // or a Supabase Edge Function, Buttondown, …
   STORAGE_KEY: 'ourtales.waitlist',
-  BUILD: { version: '1.0.1', platform: 'android' }
+  BUILD: { version: '1.0.2', platform: 'android' }
 };
 ```
 
