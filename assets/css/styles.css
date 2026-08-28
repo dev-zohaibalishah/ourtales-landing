@@ -689,6 +689,108 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .final .capture__success p { color: rgba(255, 255, 255, 0.66); }
 .final .capture__success h3 { color: #fff; }
 
+/* --------------------------------------------------------- product hunt --
+   Product Hunt's own orange is used only inside these components. It is the
+   one place on the page allowed a second accent, because a PH ask that is not
+   recognisably PH-coloured does not read as a PH ask at all — and it is kept
+   out of everything else so the crimson stays the page's only affordance. */
+.phbar {
+  background: linear-gradient(90deg, #FF6154, #E8503F);
+  color: #fff;
+}
+.phbar[hidden] { display: none; }
+.phbar__inner {
+  display: flex; align-items: center; gap: 12px;
+  min-height: 46px; padding-top: 6px; padding-bottom: 6px;
+}
+.phbar__link {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 0 auto; padding: 4px 8px; border-radius: 10px;
+  font-size: 14px; font-weight: 500; line-height: 1.35;
+  transition: background-color 0.18s var(--ease);
+}
+.phbar__link:hover { background: rgba(255, 255, 255, 0.14); }
+.phbar__mark { width: 20px; height: 20px; flex: none; }
+.phbar__cta { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.phbar__close {
+  flex: none; width: 32px; height: 32px; display: grid; place-items: center;
+  background: transparent; border: 0; border-radius: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.phbar__close:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.phbar__close svg { width: 15px; height: 15px; }
+@media (max-width: 560px) {
+  .phbar__inner { align-items: flex-start; }
+  .phbar__link { margin: 0 auto 0 0; font-size: 13.5px; }
+}
+
+/* The small hero signal. */
+.ph-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 18px; padding: 7px 14px 7px 10px;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-pill); box-shadow: var(--shadow-sm);
+  font-size: 13.5px; color: var(--muted);
+  transition: border-color 0.18s var(--ease), transform 0.18s var(--ease), color 0.18s var(--ease);
+}
+.ph-badge:hover { border-color: #FF6154; color: var(--text); transform: translateY(-1px); }
+.ph-badge svg { width: 20px; height: 20px; flex: none; }
+.ph-badge b { color: var(--text); font-weight: 600; }
+.ph-badge__arrow { color: #FF6154; font-weight: 700; }
+
+/* The full ask, late in the page. */
+.ph { background: var(--cream-deep); }
+.ph-card {
+  display: grid; grid-template-columns: 1fr 148px;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: var(--r-card); box-shadow: var(--shadow-md); overflow: hidden;
+}
+.ph-card__body { padding: 34px; }
+.ph-card__head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.ph-card__icon { width: 62px; height: 62px; border-radius: 14px; flex: none; }
+.ph-card__name { font-family: var(--serif); font-size: 1.6rem; line-height: 1.15; }
+.ph-card__tagline { font-size: 15px; color: var(--muted); margin-top: 4px; }
+.ph-card__pitch { font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 56ch; }
+.ph-card__pitch em { color: var(--text); font-style: italic; }
+.ph-card__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 20px; margin-top: 26px; }
+.ph-card__note { font-size: 13px; color: var(--muted-light); line-height: 1.45; }
+
+.ph-upvote {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 54px; padding: 0 26px 0 20px;
+  background: #FF6154; color: #fff; border-radius: var(--r-btn);
+  font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+  box-shadow: 0 10px 30px rgba(255, 97, 84, 0.32);
+  transition: transform 0.18s var(--ease), background-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.ph-upvote:hover {
+  background: #E8503F; transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(255, 97, 84, 0.4);
+}
+/* The caret lifts on hover — the same gesture the button is asking for. */
+.ph-upvote__caret { width: 22px; height: 22px; flex: none; transition: transform 0.18s var(--ease); }
+.ph-upvote:hover .ph-upvote__caret { transform: translateY(-3px); }
+
+.ph-card__aside {
+  background: linear-gradient(160deg, #FF6154, #E8503F);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 24px 16px; color: #fff;
+}
+.ph-card__logo { width: 44px; height: 44px; }
+.ph-card__wordmark {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; line-height: 1.5; text-align: center;
+}
+@media (max-width: 720px) {
+  .ph-card { grid-template-columns: 1fr; }
+  .ph-card__body { padding: 26px; }
+  .ph-card__aside { flex-direction: row; padding: 14px; gap: 10px; order: -1; }
+  .ph-card__logo { width: 24px; height: 24px; }
+  .ph-card__wordmark { letter-spacing: 0.14em; }
+  .ph-card__wordmark br { display: none; }
+  .ph-upvote { width: 100%; justify-content: center; }
+}
+
 /* --------------------------------------------------------------- footer -- */
 .footer { background: var(--ink-deep); color: rgba(255, 255, 255, 0.6); padding: 60px 0 40px; font-size: 14px; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }

@@ -28,7 +28,18 @@
     STORAGE_KEY: 'ourtales.waitlist',
     /* The build the download buttons point at. Kept here so the analytics
        events carry a version and a release bump has one place to look. */
-    BUILD: { version: '1.0.2', platform: 'android' }
+    BUILD: { version: '1.0.2', platform: 'android' },
+
+    /* PRODUCT HUNT. Flip `launchDay` to true on the morning of the launch and
+       the top bar changes from a standing mention to a dated ask — which is
+       the version that actually earns upvotes, and the version that would be
+       a lie on any other day. Everything else about the bar stays the same. */
+    PH: {
+      launchDay: false,
+      headline: 'OurTales is on Product Hunt',
+      headlineLaunchDay: 'We’re live on Product Hunt today',
+      dismissKey: 'ourtales.ph.dismissed'
+    }
   };
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
@@ -157,6 +168,50 @@
       });
     });
   });
+
+  /* ---------------------------------------------------------- product hunt
+     The upvote is the page's second ask, so it gets its own event rather than
+     being lumped in with cta_click — "did the launch bar do anything" is a
+     question worth being able to answer separately from the download funnel. */
+  $$('[data-ph]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      track('producthunt_click', {
+        location: link.getAttribute('data-cta') || 'unknown',
+        launchDay: CONFIG.PH.launchDay
+      });
+    });
+  });
+
+  (function () {
+    var bar = $('#phbar');
+    if (!bar) { return; }
+
+    /* Suppressed for anyone who came from Product Hunt. Sending someone back
+       to the page they just left is the clearest possible signal that nobody
+       is home. */
+    var cameFromPH = /(^|\.)producthunt\.com$/i.test((function () {
+      try { return new URL(document.referrer).hostname; } catch (e) { return ''; }
+    })());
+
+    var dismissed = false;
+    try { dismissed = window.localStorage.getItem(CONFIG.PH.dismissKey) === '1'; } catch (e) { /* private mode */ }
+
+    if (cameFromPH || dismissed) { return; }
+
+    var headline = $('[data-ph-headline]', bar);
+    if (headline && CONFIG.PH.launchDay) { headline.textContent = CONFIG.PH.headlineLaunchDay; }
+    bar.hidden = false;
+    track('producthunt_bar_shown', { launchDay: CONFIG.PH.launchDay });
+
+    var close = $('[data-ph-dismiss]', bar);
+    if (close) {
+      close.addEventListener('click', function () {
+        bar.hidden = true;
+        try { window.localStorage.setItem(CONFIG.PH.dismissKey, '1'); } catch (e) { /* nothing to do */ }
+        track('producthunt_bar_dismissed', {});
+      });
+    }
+  })();
 
   /* --------------------------------------------------------- checksum copy
      A 64-character hex string is not something anyone should retype. */

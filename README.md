@@ -153,7 +153,67 @@ with `JSON.parse(localStorage.getItem('ourtales.waitlist'))`.
 on the page, and no-ops otherwise. Drop your tag into `index.html` and events start
 flowing with no edit here. Events: `download_click` (the one that matters — carries version and
 section), `cta_click`, `checksum_copy`, `signup_submit`, `signup_success`,
-`signup_invalid`, `signup_error`.
+`signup_invalid`, `signup_error`, `producthunt_click`, `producthunt_bar_shown`,
+`producthunt_bar_dismissed`.
+
+---
+
+## Product Hunt
+
+The upvote is the page's **second** ask. The download is the first, and the layout says
+so — nothing about the Product Hunt treatment is allowed to outrank the install.
+
+Four touchpoints, in ascending order of commitment:
+
+| Where | What it is | Why there |
+|---|---|---|
+| Top bar | Dismissible, above the sticky header | Catches the visitor before anything else, then gets out of the way permanently |
+| Hero | Small pill under the CTA meta line | The page carries no testimonials and no user counts, so a real listing is its only outside signal — but it stays visually subordinate |
+| Before the final CTA | Full card with the upvote button | An upvote only makes sense to someone already convinced. It sits after the FAQ, and the download still gets the last word |
+| Footer | Text link | For people who scrolled past everything |
+
+### The two suppressions
+
+The bar hides itself for anyone who **arrived from Product Hunt** (`document.referrer`
+hostname matched against `/(^|\.)producthunt\.com$/` — an anchored suffix, so
+`producthunt.com.evil.io` does not match), and for anyone who has **dismissed it before**
+(`localStorage`). Sending someone back to the site they just left is the fastest way to
+look automated.
+
+### Launch day
+
+`CONFIG.PH.launchDay` in [`assets/js/main.js`](assets/js/main.js) is `false`. Flip it on
+the morning of the launch:
+
+```js
+PH: {
+  launchDay: true,          // → "We're live on Product Hunt today"
+  ...
+}
+```
+
+It only swaps the bar headline from a standing mention to a dated ask. That copy earns
+upvotes on the day and would be a lie on any other, which is why it is a switch rather
+than the default.
+
+### Attribution
+
+Every link carries `utm_source=ourtales_landing&utm_medium=referral&utm_campaign=ph_launch`
+plus a `utm_content` naming the placement (`topbar`, `hero`, `card`, `footer`), so the
+question "which placement actually sent people" is answerable in Product Hunt's own
+referral data rather than guessed at.
+
+Locally the events are `producthunt_click` (with placement and `launchDay`),
+`producthunt_bar_shown` and `producthunt_bar_dismissed`. They are separate from
+`download_click` on purpose — "did the launch bar do anything" should not be tangled up
+with the install funnel.
+
+### Assets
+
+The card uses the local app icon rather than the copy Product Hunt hosts on its CDN, and
+the Product Hunt mark is inline SVG. So the section adds **no external requests**, which
+matters on the connections this audience is actually on. PH orange (`#FF6154`) appears
+only inside these components — the crimson stays the page's only affordance colour.
 
 ---
 
@@ -167,6 +227,7 @@ section), `cta_click`, `checksum_copy`, `signup_submit`, `signup_success`,
 | A whole section about Android's "unknown source" warning | For an APK outside the Play Store this is *the* drop-off point. Explaining what the warning actually says — and publishing the checksum so the source becomes checkable — converts far better than hoping nobody notices. |
 | Version, size, minimum Android and checksum stated up front | Nothing kills a direct download like uncertainty about what you just got. Every number on the page was read out of the APK itself, not copied from a build log. |
 | "What you get / what we're asking" side by side | Naming the cost up front converts better than hiding it, and it filters out testers who will never invite anyone. |
+| The Product Hunt ask is second, never first | An upvote is worth nothing from someone who did not install. The bar is dismissible, the hero badge is a pill rather than a button, and the full card sits after the FAQ so the download keeps the last word. |
 | Objection-handling FAQ, including a "what's still rough" answer | The rough-edges answer is the highest-trust thing on the page. It is also indexed as `FAQPage` structured data. |
 | No testimonials, no user counts, no invented statistics | Nothing has shipped to real users yet. The proof here is product proof — enforceable guarantees and a build you can verify — because fabricated social proof is the fastest way to lose the audience this app is for. |
 

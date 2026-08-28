@@ -98,6 +98,25 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
+<!-- Product Hunt bar.
+     Hidden by default and revealed by script, because it is suppressed for two
+     groups it would only annoy: anyone who arrived *from* Product Hunt, and
+     anyone who has dismissed it before. Asking a visitor to go to the site they
+     just came from is the fastest way to look automated. -->
+<div class="phbar" id="phbar" hidden>
+  <div class="wrap phbar__inner">
+    <a class="phbar__link" href="https://www.producthunt.com/products/ourtales?utm_source=ourtales_landing&amp;utm_medium=referral&amp;utm_campaign=ph_launch&amp;utm_content=topbar"
+       target="_blank" rel="noopener" data-cta="ph-topbar" data-ph>
+      <svg class="phbar__mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#fff"/><path d="M22.5 20H17v-5.5h5.5a2.75 2.75 0 0 1 0 5.5ZM17 20v8" stroke="#FF6154" stroke-width="3" fill="none" stroke-linecap="square"/></svg>
+      <span class="phbar__text" data-ph-headline>OurTales is on Product&nbsp;Hunt</span>
+      <span class="phbar__cta">Give us an upvote <span aria-hidden="true">→</span></span>
+    </a>
+    <button class="phbar__close" type="button" data-ph-dismiss aria-label="Dismiss the Product Hunt banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>
+
 <header class="header" id="header">
   <div class="wrap header__inner">
     <!-- alt="" on both halves: the link already carries the accessible name,
@@ -159,6 +178,16 @@
           Free · APK, 145.0&nbsp;MB · Android 7.0+ · v1.0.2 ·
           <a href="#download">install steps &amp; checksum</a>
         </p>
+
+        <!-- Deliberately small. The page has no testimonials and no user
+             counts, so a real third-party listing is the only outside signal
+             it carries — but it is the second ask, and it should look it. -->
+        <a class="ph-badge" href="https://www.producthunt.com/products/ourtales?utm_source=ourtales_landing&amp;utm_medium=referral&amp;utm_campaign=ph_launch&amp;utm_content=hero"
+           target="_blank" rel="noopener" data-cta="ph-hero" data-ph>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#FF6154"/><path d="M22.5 20H17v-5.5h5.5a2.75 2.75 0 0 1 0 5.5ZM17 20v8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="square"/></svg>
+          <span>Find us on <b>Product Hunt</b></span>
+          <span class="ph-badge__arrow" aria-hidden="true">→</span>
+        </a>
 
         <ul class="hero__proof">
           <li class="hero__proof-item">
@@ -786,6 +815,49 @@
     </div>
   </section>
 
+  <!-- ======================================================= product hunt -->
+  <!-- Placed after the FAQ and before the final CTA on purpose. The upvote is
+       the *second* ask on this page — it only makes sense to someone already
+       convinced, and it must not get the last word ahead of the download. -->
+  <section class="section section--tight ph" id="producthunt">
+    <div class="wrap">
+      <div class="ph-card reveal">
+        <div class="ph-card__body">
+          <div class="ph-card__head">
+            <img class="ph-card__icon" src="assets/img/favicon-180.png" width="180" height="180" alt="">
+            <div>
+              <h2 class="ph-card__name">OurTales</h2>
+              <p class="ph-card__tagline">A place where memories become stories worth keeping.</p>
+            </div>
+          </div>
+
+          <p class="ph-card__pitch" data-ph-pitch>
+            If the idea of asking your people <em>before</em> you lose the answer is worth
+            existing, an upvote is the cheapest way to say so. It puts OurTales in front
+            of other people holding a photo nobody has explained yet — which is the only
+            distribution a free beta really has.
+          </p>
+
+          <div class="ph-card__actions">
+            <a class="ph-upvote" href="https://www.producthunt.com/products/ourtales?utm_source=ourtales_landing&amp;utm_medium=referral&amp;utm_campaign=ph_launch&amp;utm_content=card"
+               target="_blank" rel="noopener" data-cta="ph-card" data-ph>
+              <svg class="ph-upvote__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+              <span>Upvote on Product Hunt</span>
+            </a>
+            <p class="ph-card__note">
+              Opens Product Hunt in a new tab · takes about ten seconds · you keep reading here
+            </p>
+          </div>
+        </div>
+
+        <aside class="ph-card__aside" aria-hidden="true">
+          <svg class="ph-card__logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#fff"/><path d="M22.5 20H17v-5.5h5.5a2.75 2.75 0 0 1 0 5.5ZM17 20v8" stroke="#FF6154" stroke-width="3" fill="none" stroke-linecap="square"/></svg>
+          <p class="ph-card__wordmark">PRODUCT<br>HUNT</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- =========================================================== final CTA -->
   <section class="section final">
     <div class="final__glow" aria-hidden="true"></div>
@@ -841,6 +913,7 @@
           <li><a href="#ios">iPhone waitlist</a></li>
           <li><a href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.2">Release notes</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://www.producthunt.com/products/ourtales?utm_source=ourtales_landing&amp;utm_medium=referral&amp;utm_campaign=ph_launch&amp;utm_content=footer" target="_blank" rel="noopener" data-cta="ph-footer" data-ph>Product Hunt</a></li>
         </ul>
       </div>
     </div>
