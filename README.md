@@ -57,28 +57,29 @@ build log:
 | | |
 |---|---|
 | Version | 1.0.1 (versionCode 1) |
-| Size | 145.0 MB (152,031,865 bytes) |
+| Size | 145.0 MB (152,046,193 bytes) |
 | Package | `xyz.ourtales.app` |
 | minSdk / targetSdk | 24 (Android 7.0) / 36 |
 | ABIs | arm64-v8a, armeabi-v7a, x86, x86_64 — which is most of the size |
 | Signing | APK Signature Scheme v2/v3 |
-| SHA-256 | `4e4b77aa733768207405693c9acd8aaec4ada56ecb68657351ade92a4043fc5f` |
+| SHA-256 | `165240b9f37fa811419bac5e23a2ebb83eb2a6680965573535b5446b0bc64745` |
 
 [rel]: https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.1
 
-The `v1.0.1` asset has been replaced in place twice, so the download URL has never
-changed and three distinct binaries have now been published under it. Superseded
+The `v1.0.1` asset has been replaced in place three times, so the download URL has never
+changed and four distinct binaries have now been published under it. Superseded
 checksums, oldest first:
 
 - `6268598da095e38f91e89f4b91436e68a95b66965471c0cdd7c687313ab909de` — 148,579,637 bytes
 - `4516682f8248609d1c656eef58bbb1d7065e4f4b6024485dde5d51ebadac9c26` — 148,598,233 bytes
+- `4e4b77aa733768207405693c9acd8aaec4ada56ecb68657351ade92a4043fc5f` — 152,031,865 bytes
 
 Every one of them carries the same signing certificate (`ef4e3c1b…baa6577c`), so each
 installs straight over the last with nothing to uninstall. That is the *only* reason
 replacing in place has been safe.
 
 **It should stop being the habit, though.** `versionName` and `versionCode` have stayed
-`1.0.1` / `1` across all three, which means:
+`1.0.1` / `1` across all four, which means:
 
 - anyone holding an earlier download now fails a checksum comparison against this page,
   and a failed checksum is indistinguishable from tampering unless they read the release
