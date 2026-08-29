@@ -396,9 +396,15 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
   height: 168px; border-radius: 16px; position: relative; overflow: hidden;
   background: linear-gradient(140deg, #5D54D6 0%, #D9799D 52%, #D8A45D 100%);
 }
+.plate__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* A scrim, not decoration: the caption and the counter sit on top of a real
+   photograph now, and neither may depend on what the photograph happens to
+   look like behind them. */
 .plate::after {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(70% 60% at 30% 25%, rgba(255,255,255,0.32), transparent 60%);
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to top, rgba(20, 16, 30, 0.55) 0%, rgba(20, 16, 30, 0) 42%),
+    linear-gradient(to bottom, rgba(20, 16, 30, 0.35) 0%, rgba(20, 16, 30, 0) 34%);
 }
 .plate__tag {
   position: absolute; left: 12px; bottom: 12px; z-index: 2;
@@ -521,8 +527,14 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 @media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 44px; } }
 
 .mini-upload {
-  height: 100%; border-radius: 14px; display: grid; place-items: center;
+  height: 100%; border-radius: 14px; position: relative; overflow: hidden;
   background: linear-gradient(140deg, #4C9C92, #5D54D6); color: #fff; text-align: center;
+}
+.mini-upload img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mini-upload__label {
+  position: absolute; inset: 0; z-index: 1;
+  display: grid; place-content: center; padding: 12px;
+  background: linear-gradient(to top, rgba(20, 16, 30, 0.62), rgba(20, 16, 30, 0.18));
 }
 .mini-upload span { font-size: 12.5px; font-weight: 600; }
 .mini-upload svg { width: 26px; height: 26px; margin: 0 auto 8px; }
@@ -594,6 +606,17 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .story-card {
   background: var(--surface); border-radius: var(--r-card); border: 1px solid var(--hairline);
   box-shadow: var(--shadow-lg); overflow: hidden;
+}
+/* Fixed aspect rather than fixed height, so the photograph crops the same way
+   at every width instead of squashing on a phone. The cream underneath is what
+   shows while it loads. */
+.story-card__photo {
+  width: 100%; aspect-ratio: 16 / 9; max-height: 264px;
+  object-fit: cover; display: block;
+  /* The people in this frame sit low and slightly left of centre; a default
+     centre crop cuts them off at the bottom when the card goes full width. */
+  object-position: 46% 62%;
+  background: var(--cream-deep);
 }
 .story-card__head {
   padding: 20px 24px; border-bottom: 1px solid var(--hairline);

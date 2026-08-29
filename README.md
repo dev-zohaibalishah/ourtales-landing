@@ -273,8 +273,11 @@ for headlines, Inter for everything else. The wordmark is the supplied logo artw
 type. The four secondary colours are used only for the "many voices" motif — avatars,
 step markers, pillar icons — and never for an affordance.
 
-The phone in the hero is drawn in CSS, not photographed, and uses gradient
-"PhotoPlates" exactly as the app does in place of real images.
+The phone in the hero is drawn in CSS, but the photographs inside it are real. They are
+the app's own onboarding images, copied from `tellatale/assets/onboarding/` — the same
+pictures a new user sees on first run, so the page and the first launch show the same
+world. Nothing on the page is a stock-library placeholder, and no image is loaded from
+a third-party host.
 
 ## Files
 
@@ -302,8 +305,25 @@ header size, so it is cut into halves the page recombines horizontally:
 | `ourtales-wordmark-onink.png` | same wordmark with the navy "Our" repainted cream, for the near-black footer |
 | `og-card.png` | 1200×630 share card, the lockup centred on cream |
 | `favicon-32.png`, `favicon-180.png`, `ourtales-icon-512.png` | tab icon, apple-touch icon, manifest |
+| `photo-gathering.jpg` | the photograph inside the hero phone |
+| `photo-sunset.jpg` | step one, "add the photo" |
+| `photo-shore.jpg` | the story card in **See a story** — the narrative on that card describes *this* picture, so the two move together |
 
-All of them are generated from the single supplied PNG. Heights are set in CSS and
+### Resizing images without an encoder
+
+There is no JPEG encoder available to node here and no build step to add one, so images
+are resized **in the browser**: `.claude/static-server.js` accepts `POST /__save?name=`
+and a page script draws each photo to a canvas at the target size, calls
+`toBlob('image/jpeg', 0.74)` and posts the bytes straight back to `assets/img/`.
+
+That took the three photographs from 318 KB to 148 KB and the inline brand PNGs from
+249 KB to 97 KB — the whole page is now 335 KB on first paint, 438 KB fully scrolled,
+fonts included. Every raster asset is stored at roughly 3× its largest on-page display
+size and no larger; anything bigger is waste on the connections this audience is on.
+Both below-the-fold photographs are `loading="lazy"`, and every image carries explicit
+`width`/`height` so nothing shifts as they arrive.
+
+The brand files are generated from the single supplied PNG. Heights are set in CSS and
 widths left to the intrinsic ratio, so no half can be squashed independently of the
 other. When the logo changes, re-cut all of them rather than replacing one — a mark and
 wordmark from different revisions sitting side by side is the kind of thing nobody
