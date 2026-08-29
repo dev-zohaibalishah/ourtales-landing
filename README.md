@@ -95,7 +95,7 @@ release standing.
 gh release create v1.0.3 ./ourtales-1.0.3-android.apk --title "OurTales 1.0.3 — Android beta" --notes-file notes.md --latest
 ```
 
-Then update the page. The version, size and checksum are written into the HTML as
+Then update the page. The version and size are written into the HTML as
 literal text in several places on purpose — a download link that only works once
 JavaScript has run is a download link that silently fails for some people:
 
@@ -106,7 +106,7 @@ JavaScript has run is a download link that silently fails for some people:
   download panel heading, the `.facts` Version row, the mobile dock, `<meta name="description">`
 - **the size** — hero `.get__meta`, final `.get__meta`, the `.facts` Size row, the mobile
   dock, JSON-LD `fileSize` (only when the rounded MB actually moves)
-- **the checksum** — the `data-copy` attribute *and* the visible `<code>` beside it
+- **the checksum** — release notes only; it is deliberately not on the page
 - **JSON-LD** — `softwareVersion`, `fileSize`, `downloadUrl`
 - **`CONFIG.BUILD`** in `assets/js/main.js`, which only tags the analytics events
 
@@ -152,8 +152,8 @@ with `JSON.parse(localStorage.getItem('ourtales.waitlist'))`.
 `track()` in `main.js` pushes to `dataLayer`, `gtag` and `plausible` if any of them are
 on the page, and no-ops otherwise. Drop your tag into `index.html` and events start
 flowing with no edit here. Events: `download_click` (the one that matters — carries version and
-section), `cta_click`, `checksum_copy`, `signup_submit`, `signup_success`,
-`signup_invalid`, `signup_error`, `producthunt_click`, `producthunt_bar_shown`,
+section), `cta_click`, `signup_submit`, `signup_success`,
+`signup_invalid`, `signup_error`, `invite_link_open`, `producthunt_click`, `producthunt_bar_shown`,
 `producthunt_bar_dismissed`.
 
 ---
@@ -249,8 +249,8 @@ its code comments, both of which still describe the account-free flow as if it s
 | One primary CTA above the fold, and it is the download | The app exists and is free. Anything standing between the visitor and installing it is a leak — including an email field asking permission to send them the thing they could already have. |
 | The iPhone route is a visibly secondary button | Two equal buttons make the visitor choose a platform before they have chosen the product. The email capture still exists — one field, further down — for the half of the audience Android cannot serve yet. |
 | Six download links, one destination | Readers convert at different depths: header, hero, story section, download panel, final CTA, mobile dock. Nobody should have to scroll back up. |
-| A whole section about Android's "unknown source" warning | For an APK outside the Play Store this is *the* drop-off point. Explaining what the warning actually says — and publishing the checksum so the source becomes checkable — converts far better than hoping nobody notices. |
-| Version, size, minimum Android and checksum stated up front | Nothing kills a direct download like uncertainty about what you just got. Every number on the page was read out of the APK itself, not copied from a build log. |
+| A whole section about Android's "unknown source" warning | For an APK outside the Play Store this is *the* drop-off point. Explaining what the warning actually says — and pointing at a signed, checksummed GitHub release — converts far better than hoping nobody notices. |
+| Version, size, minimum Android and signature stated up front | Nothing kills a direct download like uncertainty about what you just got. Every number on the page was read out of the APK itself, not copied from a build log. The SHA-256 lives in the release notes rather than the page — a 64-character hash beside a download button reassures engineers and unsettles everyone else. |
 | "What you get / what we're asking" side by side | Naming the cost up front converts better than hiding it, and it filters out testers who will never invite anyone. |
 | The Product Hunt ask is second, never first | An upvote is worth nothing from someone who did not install. The bar is dismissible, the hero badge is a pill rather than a button, and the full card sits after the FAQ so the download keeps the last word. |
 | Objection-handling FAQ, including a "what's still rough" answer | The rough-edges answer is the highest-trust thing on the page. It is also indexed as `FAQPage` structured data. |

@@ -81,7 +81,7 @@
         {
           "@type": "Question",
           "name": "Why does Android warn me when I install the APK?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Because the file did not come from the Play Store. The warning is about where a file came from, not what is in it. You can check that you got the exact file we published by comparing its SHA-256 checksum, which is printed on the download section of this page." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Because the file did not come from the Play Store. The warning is about where a file came from, not what is in it. You can check that you got the exact file we published by comparing its SHA-256 checksum, which is printed in the GitHub release notes for every build." }
         },
         {
           "@type": "Question",
@@ -185,7 +185,7 @@
 
         <p class="get__meta">
           Free · APK, 145.0&nbsp;MB · Android 7.0+ · v1.0.2 ·
-          <a href="#download">install steps &amp; checksum</a>
+          <a href="#download">install steps</a>
         </p>
 
         <!-- Deliberately small. The page has no testimonials and no user
@@ -362,12 +362,6 @@
             <div class="mini-upload">
               <img src="assets/img/photo-sunset.jpg" width="620" height="465" loading="lazy" decoding="async"
                    alt="Two figures silhouetted against a sunset over water, one pointing out to sea.">
-              <div class="mini-upload__label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                  <rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="m21 17-5-5-4 4-2-2-4 4"/>
-                </svg>
-                <span>Add the photo · add your side</span>
-              </div>
             </div>
           </div>
           <h3>You start it</h3>
@@ -653,8 +647,9 @@
                 <p>
                   Android shows it for every app that did not come from the Play Store,
                   including ones from companies you have heard of. It is a statement about
-                  where the file came from — which is why we publish the checksum below, so
-                  you can prove the file you got is the file we built.
+                  where the file came from — which is why every build is published on
+                  GitHub with its SHA-256, so you can prove the file you got is the file
+                  we built.
                 </p>
               </div>
             </li>
@@ -684,15 +679,6 @@
             <div><dt>Signature</dt><dd>APK scheme v2 / v3</dd></div>
             <div><dt>Price</dt><dd>Free</dd></div>
           </dl>
-
-          <div class="checksum">
-            <div class="checksum__head">
-              <span>SHA-256</span>
-              <button type="button" class="checksum__copy" data-copy="8d7e89ab02a73b2d5bd2894023865cd9f8e5a5347756d905ff478776b14ef39b">Copy</button>
-            </div>
-            <code>8d7e89ab02a73b2d5bd2894023865cd9f8e5a5347756d905ff478776b14ef39b</code>
-            <p class="checksum__note">Compare this against your downloaded file to prove nothing changed on the way to you.</p>
-          </div>
 
           <p class="slots__meta" style="margin-top:18px">
             <span>Hosted on GitHub Releases</span>
@@ -806,7 +792,7 @@
         <details>
           <summary>Is it safe to install? Android is warning me.</summary>
           <p>That warning appears for every app that did not come from the Play Store, including ones from companies you have heard of. It is a statement about <em>where the file came from</em>, not about what is inside it.</p>
-          <p>So we make the source checkable: the build is published on GitHub Releases, it is signed with APK Signature Scheme v2/v3, and the SHA-256 checksum is printed on this page. If the checksum of your download matches, you have the exact file we built — bit for bit.</p>
+          <p>So we make the source checkable: the build is published on GitHub Releases, it is signed with APK Signature Scheme v2/v3, and every release prints its SHA-256 in the <a href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/tag/v1.0.2" target="_blank" rel="noopener">release notes</a>. If the checksum of your download matches, you have the exact file we built — bit for bit.</p>
         </details>
         <details>
           <summary>Why is it 141 MB?</summary>
@@ -896,7 +882,7 @@
 
       <p class="get__meta get__meta--center">
         Free · APK, 145.0&nbsp;MB · Android 7.0+ · v1.0.2 ·
-        <a href="#download">install steps &amp; checksum</a>
+        <a href="#download">install steps</a>
       </p>
     </div>
   </section>

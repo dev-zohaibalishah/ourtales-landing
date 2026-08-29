@@ -337,29 +337,6 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
 .facts dd code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; font-weight: 500; }
 .facts__muted { color: var(--muted); font-weight: 400; }
 
-.checksum {
-  margin-top: 22px; padding: 16px; border-radius: 14px;
-  background: var(--cream-deep); border: 1px solid var(--hairline);
-}
-.checksum__head {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px;
-}
-.checksum__head span {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted);
-}
-.checksum__copy {
-  border: 1px solid var(--hairline); background: var(--surface); color: var(--text);
-  font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: var(--r-pill);
-  transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
-}
-.checksum__copy:hover { border-color: var(--ink); }
-.checksum__copy.is-copied { border-color: var(--teal); color: #35786F; }
-.checksum > code {
-  display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11.5px; line-height: 1.7; word-break: break-all; color: var(--text);
-}
-.checksum__note { margin-top: 10px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-
 /* ----------------------------------------------------------------- iOS --- */
 .ios {
   margin-top: 40px; padding: 34px;
@@ -531,13 +508,6 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
   background: linear-gradient(140deg, #4C9C92, #5D54D6); color: #fff; text-align: center;
 }
 .mini-upload img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.mini-upload__label {
-  position: absolute; inset: 0; z-index: 1;
-  display: grid; place-content: center; padding: 12px;
-  background: linear-gradient(to top, rgba(20, 16, 30, 0.62), rgba(20, 16, 30, 0.18));
-}
-.mini-upload span { font-size: 12.5px; font-weight: 600; }
-.mini-upload svg { width: 26px; height: 26px; margin: 0 auto 8px; }
 .mini-link {
   display: flex; align-items: center; gap: 10px; padding: 12px 14px;
   border: 1.5px dashed var(--hairline); border-radius: 12px;

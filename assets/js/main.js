@@ -278,41 +278,6 @@
     }
   })();
 
-  /* --------------------------------------------------------- checksum copy
-     A 64-character hex string is not something anyone should retype. */
-  $$('[data-copy]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var value = button.getAttribute('data-copy');
-      var label = button.textContent;
-
-      function done(ok) {
-        button.textContent = ok ? 'Copied' : 'Select it manually';
-        button.classList.toggle('is-copied', ok);
-        window.setTimeout(function () {
-          button.textContent = label;
-          button.classList.remove('is-copied');
-        }, 2200);
-        track('checksum_copy', { ok: ok });
-      }
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
-        return;
-      }
-      // execCommand is deprecated but is the only path left on http:// origins.
-      try {
-        var scratch = document.createElement('textarea');
-        scratch.value = value;
-        scratch.setAttribute('readonly', '');
-        scratch.style.cssText = 'position:absolute;left:-9999px';
-        document.body.appendChild(scratch);
-        scratch.select();
-        done(document.execCommand('copy'));
-        document.body.removeChild(scratch);
-      } catch (e) { done(false); }
-    });
-  });
-
   /* ---------------------------------------------------------- header state */
   var header = $('#header');
   var dock = $('#dock');
