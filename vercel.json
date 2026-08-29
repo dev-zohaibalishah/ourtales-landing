@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/contribute/:path*", "destination": "/index.html" },
+    { "source": "/join/:path*", "destination": "/index.html" },
+    { "source": "/u/:path*", "destination": "/index.html" },
+    { "source": "/c/:path*", "destination": "/index.html" },
+    { "source": "/post/:path*", "destination": "/index.html" }
+  ]
+}

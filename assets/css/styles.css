@@ -694,6 +694,21 @@ em.mark { font-style: italic; color: var(--accent); font-family: var(--serif); }
    one place on the page allowed a second accent, because a PH ask that is not
    recognisably PH-coloured does not read as a PH ask at all — and it is kept
    out of everything else so the crimson stays the page's only affordance. */
+.invitebar {
+  background: var(--ink);
+  color: #fff;
+}
+.invitebar[hidden] { display: none; }
+.invitebar__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  padding-top: 14px; padding-bottom: 14px;
+}
+.invitebar__text {
+  margin: 0; flex: 1 1 16rem;
+  font-size: 15px; font-weight: 500; line-height: 1.45;
+}
+
 .phbar {
   background: linear-gradient(90deg, #FF6154, #E8503F);
   color: #fff;

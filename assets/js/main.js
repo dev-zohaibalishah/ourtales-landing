@@ -60,6 +60,71 @@
     } catch (e) { /* analytics must never break the page */ }
   }
 
+  /* ------------------------------------------ share / QR → app or install
+     Invite links are https://ourtales.vercel.app/?open=contribute/TOKEN so a
+     phone without OurTales still sees this page. If the app is installed, we
+     hand off via Intent / custom scheme; if it is not, the person stays here
+     and can download. */
+  var APP_SCHEME = 'ourtales';
+  var ANDROID_PACKAGE = 'xyz.ourtales.app';
+  var TOKEN = /^[ABCDEFGHJKMNPQRSTVWXYZ23456789]{20}$/;
+  var USERNAME = /^[a-zA-Z0-9_]{3,24}$/;
+
+  function appPathFromLocation() {
+    var params = new URLSearchParams(window.location.search);
+    var open = (params.get('open') || '').replace(/^\/+/, '');
+    if (open) return open;
+
+    var parts = window.location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+    if (parts[0] === 'ourtales-landing') parts.shift();
+    if (parts.length < 2) return '';
+    var kind = parts[0];
+    var id = decodeURIComponent(parts[1] || '');
+    if ((kind === 'contribute' || kind === 'c' || kind === 'join') && TOKEN.test(id)) {
+      return (kind === 'c' ? 'contribute/' : kind + '/') + id;
+    }
+    if (kind === 'u') {
+      var handle = id.replace(/^@/, '');
+      return USERNAME.test(handle) ? 'u/' + handle : '';
+    }
+    if (kind === 'post' && id) return 'post/' + id;
+    return '';
+  }
+
+  function tryOpenInstalledApp(path) {
+    var fallback = window.location.href;
+    var ua = navigator.userAgent || '';
+    if (/Android/i.test(ua)) {
+      window.location.href =
+        'intent://' + path + '#Intent;scheme=' + APP_SCHEME +
+        ';package=' + ANDROID_PACKAGE +
+        ';S.browser_fallback_url=' + encodeURIComponent(fallback) +
+        ';end';
+      return;
+    }
+    window.location.href = APP_SCHEME + ':///' + path;
+  }
+
+  (function inviteHandoff() {
+    var path = appPathFromLocation();
+    if (!path) return;
+
+    var bar = $('#invitebar');
+    var copy = $('#invitebar-text');
+    var kind = path.split('/')[0];
+    var lines = {
+      contribute: 'Someone invited you to add your side to a memory. Install OurTales if you do not have it — then this link will open it.',
+      join: 'Someone invited you into their circle. Install OurTales if you do not have it — then this link will open the invite.',
+      u: 'This is someone’s OurTales profile. Install the app to add them.',
+      post: 'This story opens in OurTales. Install the app if you do not have it yet.'
+    };
+    if (copy) copy.textContent = lines[kind] || copy.textContent;
+    if (bar) bar.hidden = false;
+
+    track('invite_link_open', { kind: kind });
+    window.setTimeout(function () { tryOpenInstalledApp(path); }, 400);
+  })();
+
   /* ------------------------------------------------------------ CTA clicks */
   $$('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function () {
