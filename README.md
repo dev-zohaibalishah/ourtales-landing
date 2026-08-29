@@ -217,6 +217,31 @@ only inside these components — the crimson stays the page's only affordance co
 
 ---
 
+## What this page may not claim
+
+The page sells a trust product, so a wrong sentence on it costs more than a wrong
+sentence elsewhere. Two claims were on it for several days and were **false in the
+shipped build** — they have been removed, and they must not come back until the build
+catches up:
+
+- **"Contributors need no account."** Everyone taking part installs the app and signs
+  up. The guest endpoints exist on the server (`guest-memory`, `submit-remark`,
+  `add-reaction`), and the app's route guard does let `/contribute/[token]` through
+  without a session — but `EXPO_PUBLIC_LINK_HOST` is empty in the shipped APK, so
+  invite links fall back to the app scheme and no browser route is reachable.
+- **"It opens in a browser — no download."** There is no deployed web build of the app.
+  An invite link lands on *this* page, which offers the install.
+
+What is true, and is what the page says now: sign-up is a **username and a password** —
+no email address, no phone number, no real name. That is a real friction story and it
+does not need embellishing.
+
+Before adding any capability claim, check it against the app at
+`C:UsersDELLDesktopClaude	ellatale` rather than against the app's README or
+its code comments, both of which still describe the account-free flow as if it shipped.
+
+---
+
 ## How the page is built to convert
 
 | Decision | Reason |

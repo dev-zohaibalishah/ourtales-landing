@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OurTales — every photo holds more than one memory</title>
-<meta name="description" content="OurTales turns one photograph into a shared story. The people who were there add their side by voice, photo or text — no account, no app install. Download the free Android beta (v1.0.2).">
+<meta name="description" content="OurTales turns one photograph into a shared story. The people who were there add their side by voice, photo or text, and nobody’s words get rewritten. Free Android beta — sign up with a username, no email needed.">
 <meta name="theme-color" content="#FFF9F2">
 <!-- Absolute URLs, because a crawler and a share-card scraper do not resolve
      relative ones. Point these at the custom domain the day it exists. -->
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OurTales">
 <meta property="og:title" content="OurTales — every photo holds more than one memory">
-<meta property="og:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account. Free Android beta, out now.">
+<meta property="og:description" content="One photo. Everyone who was there adds their side — by voice, photo or text — and the story keeps every version. Free Android beta, out now.">
 <meta property="og:url" content="https://dev-zohaibalishah.github.io/ourtales-landing/">
 <meta property="og:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="The OurTales logo: an open photo album showing a family watching a sunset, above the OurTales wordmark.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="OurTales — every photo holds more than one memory">
-<meta name="twitter:description" content="One photo. Everyone who was there adds their side — by voice, photo or text, without making an account.">
+<meta name="twitter:description" content="One photo. Everyone who was there adds their side — by voice, photo or text — and the story keeps every version.">
 <meta name="twitter:image" content="https://dev-zohaibalishah.github.io/ourtales-landing/assets/img/og-card.png">
 
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -52,7 +52,7 @@
       "fileSize": "145.0 MB",
       "installUrl": "https://dev-zohaibalishah.github.io/ourtales-landing/#download",
       "downloadUrl": "https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.2/ourtales-1.0.2-android.apk",
-      "description": "A mobile app that turns one photograph into a shared, source-aware story: the owner starts with their own account of it, and the people who were there add theirs — by voice, photo or text — without creating an account.",
+      "description": "A mobile app that turns one photograph into a shared, source-aware story: the owner starts with their own account of it, and the people who were there add theirs — by voice, photo or text — with every version kept and nobody’s words rewritten.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {
@@ -60,8 +60,8 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Do the people I invite need to install OurTales?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. You send a link, they open it in any browser and record or type their side. No download, no sign-up, no password. The whole point is that the person who remembers the most is usually the least likely to install an app." }
+          "name": "Do the people I invite need OurTales too?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, for now. Everyone contributing to a memory installs the app and makes an account. Signing up is a username and a password — no email address, no phone number, no real name — so it takes about twenty seconds. A browser route that needs no app at all is built on the server but is not switched on in this build." }
         },
         {
           "@type": "Question",
@@ -86,7 +86,7 @@
         {
           "@type": "Question",
           "name": "Is there an iPhone version?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The Android beta is out first. Leave your email and you will hear the day the iOS build is ready — and the people you invite can already take part from an iPhone browser, because contributing needs no app at all." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The Android beta is out first, and everyone taking part needs an Android phone for now. Leave your email and you will hear the day the iOS build is ready." }
         }
       ]
     }
@@ -103,6 +103,15 @@
      groups it would only annoy: anyone who arrived *from* Product Hunt, and
      anyone who has dismissed it before. Asking a visitor to go to the site they
      just came from is the fastest way to look automated. -->
+<!-- Shown when someone opened a share / QR link without the app.
+     Script fills the label and tries to hand off to OurTales first. -->
+<div class="invitebar" id="invitebar" hidden>
+  <div class="wrap invitebar__inner">
+    <p class="invitebar__text" id="invitebar-text">This link opens in OurTales. Install the app if you do not have it yet.</p>
+    <a class="btn btn--accent btn--sm" href="https://github.com/dev-zohaibalishah/ourtales-landing/releases/download/v1.0.2/ourtales-1.0.2-android.apk" data-cta="invite-bar" data-download>Download the app</a>
+  </div>
+</div>
+
 <div class="phbar" id="phbar" hidden>
   <div class="wrap phbar__inner">
     <a class="phbar__link" href="https://www.producthunt.com/products/ourtales?utm_source=ourtales_landing&amp;utm_medium=referral&amp;utm_campaign=ph_launch&amp;utm_content=topbar"
@@ -157,7 +166,7 @@
         <p class="lede">
           OurTales turns one photograph into a shared story. You add your side, then
           send a link — and everyone who was there adds theirs by voice, photo or
-          text. <strong>They never make an account.</strong> Nothing is public unless
+          text. <strong>Every version is kept.</strong> Nothing is public unless
           you say so.
         </p>
 
@@ -192,7 +201,7 @@
         <ul class="hero__proof">
           <li class="hero__proof-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Contributors need no app and no login
+            Sign up with a username — no email, no phone number
           </li>
           <li class="hero__proof-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -260,8 +269,8 @@
         </div>
 
         <div class="float float--b">
-          <p class="float__label">Contributor</p>
-          <p class="float__value">No account</p>
+          <p class="float__label">Sign-up</p>
+          <p class="float__value">A username</p>
         </div>
 
         <div class="float float--c">
@@ -340,7 +349,8 @@
         <h2 class="h2">Three steps, and only one of them is yours.</h2>
         <p class="lede">
           The hard part of collecting memories was never the collecting — it was getting
-          other people to take part. So we removed the part they refuse to do.
+          everyone else to take part before the moment passed. So the asking is one
+          screen, and answering is a voice note.
         </p>
       </div>
 
@@ -363,15 +373,15 @@
         <article class="step reveal">
           <div class="step__art">
             <div class="mini-link">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
-              ourtales.app/c/9f2b…
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/></svg>
+              Hold up the code · or send the link
             </div>
-            <div class="mini-row"><span class="mini-dot" style="background:#5D54D6">F</span> Opened the link · added a voice note</div>
-            <div class="mini-row"><span class="mini-dot" style="background:#4C9C92">N</span> Opened the link · added a photo</div>
+            <div class="mini-row"><span class="mini-dot" style="background:#5D54D6">F</span> Scanned it at the table · voice note</div>
+            <div class="mini-row"><span class="mini-dot" style="background:#4C9C92">N</span> Opened your link · added a photo</div>
             <div class="mini-row"><span class="mini-dot" style="background:#D9799D">S</span> Typed two lines from her phone</div>
           </div>
-          <h3>They add theirs — with no account</h3>
-          <p>Share the link in WhatsApp, iMessage, anywhere. It opens in a browser. No download, no sign-up, no password to reset. An 80-year-old can hold the phone and talk.</p>
+          <h3>They add theirs</h3>
+          <p>The people who remember are usually in the room, so the invite is a QR code you hold up — or a link you send. They install OurTales and pick a username: no email, no phone number, no real name.</p>
         </article>
 
         <article class="step reveal">
@@ -396,7 +406,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Inside the app</span>
-        <h2 class="h2">Built around the person who won't install anything.</h2>
+        <h2 class="h2">Built for the people who were actually there.</h2>
       </div>
 
       <div class="pillars">
@@ -521,8 +531,8 @@
         <article class="claim">
           <svg class="claim__tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           <div>
-            <h3>A leaked invite link is not an open door</h3>
-            <p>Guest endpoints are rate-limited and resolve the token server-side. Contributors never learn the token, and never see who else was invited.</p>
+            <h3>An invite is a key to one memory, not to your account</h3>
+            <p>Tokens are resolved server-side and rate-limited, and row-level security decides every read. Someone you invite to one photo sees that photo — never your other memories, and never who else was invited.</p>
           </div>
         </article>
       </div>
@@ -688,12 +698,12 @@
       <div class="ios reveal" id="ios">
         <div>
           <span class="eyebrow eyebrow--muted">On an iPhone?</span>
-          <h3 class="h3" style="font-family:var(--serif);font-size:1.5rem;margin-bottom:10px">The iOS build isn't ready. You can still take part today.</h3>
+          <h3 class="h3" style="font-family:var(--serif);font-size:1.5rem;margin-bottom:10px">The iOS build isn’t ready yet.</h3>
           <p style="color:var(--muted);font-size:15.5px;max-width:52ch">
-            Anyone can contribute to a memory from an iPhone right now — contributing
-            happens in the browser and needs no app. It is <em>starting</em> a memory that
-            needs Android for the moment. Leave your email and you'll hear the day that
-            changes.
+            Everyone taking part needs the app, and the app is Android-only for the
+            moment — so an iPhone cannot join a memory yet, not even to add one voice
+            note. That is the honest answer. Leave your email and you'll hear the day
+            it changes.
           </p>
         </div>
 
@@ -741,7 +751,7 @@
           <h3>What you get</h3>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Free forever on everything you collect during the beta</b> — whatever we charge for later, your beta memories stay open to you.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A browser link for the people you invite, so nobody else has to install anything.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A QR code and a link for the people you invite — sign-up on their side is a username and a password, nothing more.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A direct line to the people building it — not a support form.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Export of everything you and your circle contribute, whenever you ask.</span></li>
           </ul>
@@ -751,7 +761,7 @@
           <h3>What we're asking</h3>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Start with one real photo that actually matters to you. Not a test image.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Invite three or more people who were there — the account-free path is the thing we most need to see fail.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Invite three or more people who were there. Getting other people over the install is the thing we most need to watch fail.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Tell us what broke. Fifteen honest minutes after your first week is worth more than a hundred installs.</span></li>
           </ul>
         </div>
@@ -769,8 +779,9 @@
 
       <div class="faq__list reveal">
         <details open>
-          <summary>Do the people I invite have to install anything?</summary>
-          <p>No. You send a link; it opens in whatever browser they already have. No download, no sign-up, no password. This is the single most important thing about the product — the person who remembers the most is usually the least likely to install an app.</p>
+          <summary>Do the people I invite need OurTales too?</summary>
+          <p>Yes — for now. Everyone adding to a memory installs the app and makes an account. Signing up is a username and a password: no email address, no phone number, no real name, about twenty seconds.</p>
+          <p>We would rather it were nothing at all. The server side of an account-free browser route is built — the endpoints that let someone hold a token instead of an account already exist — but it is not switched on in this build, so we are not going to describe it as if you could use it today. Getting an elderly relative over the install is the friction we most want the beta to show us.</p>
         </details>
         <details>
           <summary>Can the AI make things up about my family?</summary>
@@ -796,8 +807,7 @@
         </details>
         <details>
           <summary>iPhone or Android?</summary>
-          <p>Android for now — the iOS build isn't ready, and there is a one-field waitlist on this page for the day it is.</p>
-          <p>But the people you invite need neither. Contributing happens in a browser, so an iPhone, an old tablet or a desktop all work today.</p>
+          <p>Android for now, and that applies to everyone in the circle — the people you invite need an Android phone too, because taking part means installing the app. There is a one-field waitlist on this page for the day the iOS build lands.</p>
         </details>
         <details>
           <summary>How do I get updates?</summary>
@@ -809,7 +819,8 @@
         </details>
         <details>
           <summary>What's still rough?</summary>
-          <p>It's a beta and we'd rather you hear it from us: there is no password reset yet (we don't ask for an email at sign-up, so there's nowhere to send one), invite links can't be revoked once sent, and the story won't describe what is in the photo because image analysis is switched off — it says so rather than guessing. The beta exists to break exactly these.</p>
+          <p>It's a beta and we'd rather you hear it from us. Everyone you invite has to install the app and sign up — the account-free browser route exists on the server but is not switched on. There is no password reset (we don't ask for an email at sign-up, so there is nowhere to send one). Invite links can't be revoked once sent. And the story won't describe what is in the photo, because image analysis is off — it says so rather than guessing.</p>
+          <p>The beta exists to break exactly these, in that order.</p>
         </details>
       </div>
     </div>
